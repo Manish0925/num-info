@@ -1,0 +1,20 @@
+USAGE
+	python main.py [OPTIONS]  
+
+NAME
+
+SYNOPSIS  
+
+DESCRIPTION  
+
+OPTIONS  
+	-b , --browser <value>
+		<value> can be one among the following
+		- chrome
+		- firefox
+
+	-s , --scan <number>
+		performs various scans/lookups based on the input and returns results
+
+	-h , --help
+		prints this help page
