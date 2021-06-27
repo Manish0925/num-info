@@ -49,9 +49,9 @@ else:
 	auxillary.exit_condition()
 
 # # executes the code only if the file is being run directly (and not imported)
-# if __name__ == '__main__':
-person_lookups = Lookups()
-person_lookups.set_browser(browser)
-person_lookups.set_number()
-person_lookups.processes()
-person_lookups.display_results()
+if __name__ == '__main__':
+	person_lookups = Lookups()
+	person_lookups.set_browser(browser)
+	person_lookups.set_number()
+	person_lookups.processes()
+	person_lookups.display_results()
