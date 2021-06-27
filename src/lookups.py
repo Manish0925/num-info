@@ -1,14 +1,11 @@
 import phonenumbers
-from truecaller_search import TrueCaller
+from truecaller_lookup import TrueCaller
 from phone_iso3166.country import phone_country
-from phndir_search import Phndir
+from phndir_lookup import Phndir
 from auxillary import line
 
 
 class Lookups:
-
-	def __init__(self) -> None:
-		pass
 
 	def set_browser(self, browser):
 		self.browser = browser

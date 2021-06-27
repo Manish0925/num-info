@@ -2,7 +2,7 @@ from lookups import Lookups
 import sys
 import auxillary
 
-
+# default browser
 browser = 'chrome'
 
 if len(sys.argv) == 1:

@@ -37,7 +37,6 @@ class Phndir:
 			print('Search limit exceeded. Try again in a day or use a different IP address.')
 			driver.quit()
 			return -1
-
 		self.num_type = driver.find_element_by_xpath(
 			"/html/body/div[4]/div/div[1]/div[1]/div[2]/dl/div[2]/dd/span").text.upper()
 		self.carrier = driver.find_element_by_xpath(
