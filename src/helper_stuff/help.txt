@@ -1,20 +1,24 @@
-USAGE
-	python main.py [OPTIONS]  
-
 NAME
+	main - 
 
 SYNOPSIS  
+	python main.py [-b | --browser <value>] [-s | --scan <number>] [-h | --help]
 
 DESCRIPTION  
 
 OPTIONS  
 	-b , --browser <value>
 		<value> can be one among the following
-		- chrome
-		- firefox
+			chrome (default)
+			firefox
 
 	-s , --scan <number>
 		performs various scans/lookups based on the input and returns results
+
+		<number> must adhere to one of the following formats
+			International: (COUNTRY_CODE)(10_DIGIT_PHONE_NUMBER)
+			(or)
+			E164: (+)(COUNTRY_CODE)(10_DIGIT_PHONE_NUMBER)
 
 	-h , --help
 		prints this help page
