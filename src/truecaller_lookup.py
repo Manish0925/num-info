@@ -48,11 +48,13 @@ class TrueCaller:
         )
         microsoft_sign_in.click()
         sleep(2)
+        print()
         auxillary.line()
         print(
             "Personal details required for enabling the required services\nNOTE: Details aren't stored"
         )
         auxillary.line()
+        print()
 
         # signing in with microsoft account was the only option since google didn't allow signing-in due to security reasons
         print("Microsoft Details:")
@@ -75,8 +77,10 @@ class TrueCaller:
                 "/html/body/div[1]/main/div/div[1]/div[1]/header/div[2]/h1/span"
             ).text.title()
         except NoSuchElementException:
+            print("Issue could be one among the following:")
+            print("- Incorrect username\n-Incorrect password")
             print(
-                "Search limit exceeded. Try again in a day or use a different microsoft account."
+                "- Search limit exceeded. Try again in a day or use a different microsoft account."
             )
             driver.quit()
             return -1
@@ -115,7 +119,7 @@ class TrueCaller:
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()
-        print(colored("Truecaller Search Results:", color1))
+        print(colored("Truecaller Lookup Results:", color1))
         auxillary.line()
         print(colored("Name                :    ", color2), colored(self.name, color3))
         print(

@@ -9,17 +9,17 @@ class Local:
         self.phone_no = phone_no
         self.parse_details = phonenumbers.parse(self.phone_no)
         self.national_no = phonenumbers.format_number(
-            self.phone_no, phonenumbers.PhoneNumberFormat.NATIONAL
+            self.parse_details, phonenumbers.PhoneNumberFormat.NATIONAL
         )
         self.international_no = phonenumbers.format_number(
-            self.phone_no, phonenumbers.PhoneNumberFormat.INTERNATIONAL
+            self.parse_details, phonenumbers.PhoneNumberFormat.INTERNATIONAL
         )
         self.e164_no = phonenumbers.format_number(
-            self.phone_no, phonenumbers.PhoneNumberFormat.E164
+            self.parse_details, phonenumbers.PhoneNumberFormat.E164
         )
         self.country_code = self.parse_details.country_code
-        self.country = geocoder.description_for_number(self.phone_no, "en")
-        self.carrier = carrier.name_for_number(self.phone_no, "en")
+        self.country = geocoder.description_for_number(self.parse_details, "en")
+        self.carrier = carrier.name_for_number(self.parse_details, "en")
 
     def display_results(self, color1, color2, color3):
         print()

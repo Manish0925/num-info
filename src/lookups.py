@@ -1,5 +1,7 @@
 import phonenumbers
 from phone_iso3166.country import phone_country
+import local_lookup
+import numverify_lookup
 import truecaller_lookup
 import phndir_lookup
 import auxillary
@@ -14,11 +16,12 @@ class Lookups:
     # sets the phone no. based on input
     def set_number(self, string_no):
 
+        self.string_no = string_no
         # in case no. is entered in International format, it is converted into E164 format since the parse function can only parse E164 format nos.
-        if not string_no.startswith("+"):
-            string_no = "+" + string_no
+        if not self.string_no.startswith("+"):
+            self.string_no = "+" + self.string_no
 
-        self.phone_no = phonenumbers.parse(string_no)
+        self.phone_no = phonenumbers.parse(self.string_no)
 
         if not phonenumbers.is_valid_number(self.phone_no):
             print("Invalid phone number entered. Exiting...")
@@ -33,10 +36,20 @@ class Lookups:
         self.iso3166_code = phone_country(self.country_code)
         auxillary.line()
 
+        # local lookup
+        print("Performing Local Lookup...")
+        self.local_instance = local_lookup.Local(self.string_no)
+
+        # numverify lookup
+        print("Performing Numverify Lookup...")
+        self.numverify_instance = numverify_lookup.Numverify(self.string_no)
+        self.numverify_instance.processes()
+
         # truecaller lookup (must have a microsoft account)
         self.microsoft_flag = input("Do you have a microsoft account? (Y/n): ").lower()
 
         if self.microsoft_flag == "y":
+            print("Performing Truecaller Lookup...")
             self.truecaller_instance = truecaller_lookup.TrueCaller(
                 self.iso3166_code, self.national_no, self.browser
             )
@@ -47,11 +60,12 @@ class Lookups:
 
         else:
             auxillary.line()
-            print("Microsoft account is required for Truecaller lookup")
+            print("Microsoft account is required for Truecaller Lookup")
             auxillary.line()
 
         # phndir lookup (applicable only to Indian nos.)
         if self.country_code == 91:
+            print("Performing Phndir Lookup...")
             self.phndir_instance = phndir_lookup.Phndir(self.national_no, self.browser)
             if self.phndir_instance.process() != -1:
                 self.phndir_instance.set_lookup_status()
@@ -65,8 +79,16 @@ class Lookups:
         # colors for displaying results
         colors = ("blue", "red", "green")
 
+        # no need to check if the local and numverify lookups have taken place since they are guaranteed to take place
+
+        self.local_instance.display_results(colors[0], colors[1], colors[2])
+
+        self.numverify_instance.display_results(colors[0], colors[1], colors[2])
+
+        # display truecaller results only if the truecaller lookup has taken place
         if self.microsoft_flag == "y" and self.truecaller_instance.get_lookup_status():
             self.truecaller_instance.display_results(colors[0], colors[1], colors[2])
 
+        # display phndir results only if the phndir lookup has taken place
         if self.phndir_instance.get_lookup_status():
             self.phndir_instance.display_results(colors[0], colors[1], colors[2])

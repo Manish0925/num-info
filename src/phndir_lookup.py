@@ -94,7 +94,7 @@ class Phndir:
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()
-        print(colored("Phndir Search Results:", color1))
+        print(colored("Phndir Lookup Results:", color1))
         auxillary.line()
         print(
             colored("Caller name         :    ", color2),
