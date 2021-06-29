@@ -1,5 +1,8 @@
 import sys
 
+# colors for displaying results
+colors = ("blue", "red", "green")
+
 
 def line():
     print("-----------------------------------------------------------")
@@ -13,4 +16,5 @@ def display_help():
 
 
 def exit_condition():
-    sys.exit("Invalid options provided. Exiting...")
+    print("Invalid options provided. Exiting...")
+    sys.exit()

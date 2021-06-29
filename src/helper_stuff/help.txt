@@ -1,10 +1,34 @@
 NAME
-	main - 
+	<main> - an OSINT based tool to perform phone number lookups
 
 SYNOPSIS  
 	python main.py [-b | --browser <value>] [-s | --scan <number>] [-h | --help]
 
 DESCRIPTION  
+	<main> is a tool used to extract information by performing lookups on phone numbers using various OSINT techniques.
+	The turning point of this tool comes from the Truecaller and Phndir lookups. Alongside returning standard information, they also return username and email address.
+	Both of them in turn providing much more easier access to social media and related stuff with the help of Google Dorks using relevant search terms.
+	Lookups performed:
+		- Local Lookup:
+			Returns details from the local phone number library
+		- Numverify Lookup:
+			Returns details from the numverify API in the form of json data
+		- Truecaller Lookup:
+			Returns details from the Truecaller website.
+			* Limitations:
+				> Requirement of Microsoft Account since Google blocks selenium-automated browsers
+				> Only 4 searches possible per day with a given account
+				> No guarantee on compatibility with VPNs.
+		- Phndir Lookup:
+			Returns details from the Phndir website.
+			* Salient feature
+				> Provides latest service provider for a phone number (unlike others providing original/default ones)
+			* Limitations
+				> Email address masked with '*' characters to some extent
+				> Only 4 searches possible per day with a given IP address
+		
+		- Google Dorks Lookup:
+			With the help of username and email address, there is an exponential increase in the relevance of the search results since most of the social media and related accounts and websites return better and more accurate results upon username or email being provided as inputs.
 
 OPTIONS  
 	-b , --browser <value>
@@ -15,10 +39,8 @@ OPTIONS
 	-s , --scan <number>
 		performs various scans/lookups based on the input and returns results
 
-		<number> must adhere to one of the following formats
-			International: (COUNTRY_CODE)(10_DIGIT_PHONE_NUMBER)
-			(or)
-			E164: (+)(COUNTRY_CODE)(10_DIGIT_PHONE_NUMBER)
+		<number> must adhere to the following format
+			('+'/'')(COUNTRY_CODE)(10_DIGIT_PHONE_NUMBER)
 
 	-h , --help
 		prints this help page
