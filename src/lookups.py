@@ -6,6 +6,8 @@ import numverify_lookup
 import truecaller_lookup
 import phndir_lookup
 import auxillary
+import number_google_dorks_lookup
+import name_google_dorks_lookup
 
 
 class Lookups:
@@ -45,11 +47,11 @@ class Lookups:
         self.local_instance = local_lookup.Local(self.string_no)
         print("Done")
 
-        # # numverify lookup (not always reliable due to server-side issues)
-        # print("Performing Numverify Lookup...")
-        # self.numverify_instance = numverify_lookup.Numverify(self.string_no)
-        # self.numverify_instance.processes()
-        # print("Done")
+        # numverify lookup (not always reliable due to server-side issues)
+        print("Performing Numverify Lookup...")
+        self.numverify_instance = numverify_lookup.Numverify(self.string_no)
+        self.numverify_instance.processes()
+        print("Done")
 
         # truecaller lookup (must have a microsoft account)
         self.microsoft_flag = input("Do you have a microsoft account? (Y/n): ").lower()
@@ -88,6 +90,33 @@ class Lookups:
                 print("Phndir lookup only applicable to Indian nos.")
                 auxillary.line()
 
+        # google dorks number lookup
+        print("Performing Google Dorks Number Lookup...")
+        self.number_google_dorks_instance = (
+            number_google_dorks_lookup.NumberGoogleDorksLookup(self.string_no)
+        )
+        print("Done")
+
+        # google dorks name lookup (performed only if either of truecaller or phndir lookup or both succeeded)
+        if (
+            self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
+        ) or (
+            self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
+        ):
+            if (
+                self.microsoft_flag != "n"
+                and self.truecaller_instance.get_lookup_status()
+            ):
+                self.person_name = self.truecaller_instance.name
+            else:
+                self.person_name = self.phndir_instance.caller_name
+
+            print("Performing Google Dorks Name Lookup...")
+            self.name_google_dorks_instance = (
+                name_google_dorks_lookup.NameGoogleDorksLookup(self.person_name)
+            )
+            print("Done")
+
     def display_results(self):
 
         # no need to check if the local and numverify lookups have taken place since they are guaranteed to take place
@@ -96,9 +125,9 @@ class Lookups:
             auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
         )
 
-        # self.numverify_instance.display_results(
-        #     auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-        # )
+        self.numverify_instance.display_results(
+            auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+        )
 
         # display truecaller results only if the truecaller lookup has taken place
         if self.microsoft_flag == "y" and self.truecaller_instance.get_lookup_status():
@@ -109,5 +138,20 @@ class Lookups:
         # display phndir results only if the phndir lookup has taken place
         if self.phndir_scan_flag == "y" and self.phndir_instance.get_lookup_status():
             self.phndir_instance.display_results(
+                auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+            )
+
+        # display google dorks phone number results
+        self.number_google_dorks_instance.display_results(
+            auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+        )
+
+        # display google dorks phone name results (only if either of phndir or truecaller lookup has succeeded)
+        if (
+            self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
+        ) or (
+            self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
+        ):
+            self.name_google_dorks_instance.display_results(
                 auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
             )

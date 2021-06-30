@@ -95,36 +95,36 @@ person_lookups.set_number(string_no)
 person_lookups.processes()
 person_lookups.display_results()
 
-# else:
-import name_google_dorks_lookup
+# # else:
+# import name_google_dorks_lookup
 
-user_name = None
-user_email_id = None
-user_phone_no = (
-    "+"
-    + str(person_lookups.local_instance.country_code)
-    + str(person_lookups.local_instance.national_no)
-)
+# user_name = None
+# user_email_id = None
+# user_phone_no = (
+#     "+"
+#     + str(person_lookups.local_instance.country_code)
+#     + str(person_lookups.local_instance.national_no)
+# )
 
-if (
-    person_lookups.country_code == 91
-    and person_lookups.phndir_scan_flag.lower() == "y"
-    and person_lookups.phndir_instance.get_lookup_status()
-):
-    user_name = person_lookups.phndir_instance.caller_name
-    user_email_id = person_lookups.phndir_instance.email_address
+# if (
+#     person_lookups.country_code == 91
+#     and person_lookups.phndir_scan_flag.lower() == "y"
+#     and person_lookups.phndir_instance.get_lookup_status()
+# ):
+#     user_name = person_lookups.phndir_instance.caller_name
+#     user_email_id = person_lookups.phndir_instance.email_address
 
-if (
-    person_lookups.microsoft_flag.lower() == "y"
-    and person_lookups.truecaller_instance.get_lookup_status()
-):
-    user_name = person_lookups.truecaller_instance.name
-    user_email_id = person_lookups.truecaller_instance.email_id
+# if (
+#     person_lookups.microsoft_flag.lower() == "y"
+#     and person_lookups.truecaller_instance.get_lookup_status()
+# ):
+#     user_name = person_lookups.truecaller_instance.name
+#     user_email_id = person_lookups.truecaller_instance.email_id
 
-if user_name != None:
-    name_google_dorks_lookup_instance = name_google_dorks_lookup.NameGoogleDorksLookup(
-        user_name
-    )
-    name_google_dorks_lookup_instance.display_results(
-        auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-    )
+# if user_name != None:
+#     name_google_dorks_lookup_instance = name_google_dorks_lookup.NameGoogleDorksLookup(
+#         user_name
+#     )
+#     name_google_dorks_lookup_instance.display_results(
+#         auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+#     )
