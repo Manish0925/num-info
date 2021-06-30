@@ -4,6 +4,8 @@ from phonenumbers import parse
 
 
 class NumberGoogleDorksLookup:
+
+    # initializes the instance attributes
     def __init__(self, number) -> None:
         self.number = number
         self.parsed_number = parse(number)
@@ -58,6 +60,7 @@ class NumberGoogleDorksLookup:
             "smslive.co",
         )
 
+    # returns links in by adding or operators to various number formats
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()
@@ -235,7 +238,3 @@ class NumberGoogleDorksLookup:
             )
             print(colored(url, color3))
         auxillary.line()
-
-
-# number_google_dorks_lookup_instance = NumberGoogleDorksLookup("+918790133019")
-# number_google_dorks_lookup_instance.display_results("blue", "red", "green")

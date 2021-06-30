@@ -3,6 +3,8 @@ from termcolor import colored
 
 
 class NameGoogleDorksLookup:
+
+    # initializes the instance attributes
     def __init__(self, name) -> None:
         self.name = name
         self.social_network_sites = (
@@ -44,7 +46,7 @@ class NameGoogleDorksLookup:
                 "https://www.google.com/search?q=%28ext%3Adoc+OR+ext%3Adocx+OR+ext%3Aodt+OR+ext%3Apdf+OR+ext%3Artf+OR+ext%3Asxw+OR+ext%3Apsw+OR+ext%3Appt+OR+ext%3Apptx+OR+ext%3Apps+OR+ext%3Acsv+OR+ext%3Atxt+OR+ext%3Axls%29+intext%3A%22"
                 + self.name
                 + "%22",
-                color3
+                color3,
             )
         )
         auxillary.line()

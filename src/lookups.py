@@ -1,4 +1,3 @@
-import sys
 import phonenumbers
 from phone_iso3166.country import phone_country
 import local_lookup
@@ -8,12 +7,16 @@ import phndir_lookup
 import auxillary
 import number_google_dorks_lookup
 import name_google_dorks_lookup
+from termcolor import colored
 
 
 class Lookups:
     def __init__(self) -> None:
         self.truecaller_instance = None
         self.phndir_instance = None
+        file = open("./helper_stuff/logo.txt", "r")
+        print(colored(file.read(), "red"))
+        file.close()
 
     # sets the webdriver (browser) to firefox or chrome
     def set_browser(self, browser):

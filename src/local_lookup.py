@@ -5,6 +5,8 @@ import auxillary
 
 
 class Local:
+
+    # initializes the instance attributes
     def __init__(self, phone_no) -> None:
         self.phone_no = phone_no
         self.parse_details = phonenumbers.parse(self.phone_no)
@@ -21,6 +23,7 @@ class Local:
         self.country = geocoder.description_for_number(self.parse_details, "en")
         self.carrier = carrier.name_for_number(self.parse_details, "en")
 
+    # runs the Local lookup process
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()
