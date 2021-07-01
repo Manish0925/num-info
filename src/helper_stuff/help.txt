@@ -1,11 +1,11 @@
 NAME
-	<main> - an OSINT based tool to perform phone number lookups
+	num-info - an OSINT based tool to perform phone number lookups
 
 SYNOPSIS  
-	python main.py [-b | --browser <value>] [-s | --scan <number>] [-h | --help]
+	python num-info.py [-b | --browser <value>] [-s | --scan <number>] [-h | --help]
 
 DESCRIPTION  
-	<main> is a tool used to extract information by performing lookups on phone numbers using various OSINT techniques.
+	num-info is a tool used to extract information by performing lookups on phone numbers using various OSINT techniques.
 	The turning point of this tool comes from the Truecaller and Phndir lookups. Alongside returning standard information, they also return username and email address.
 	Both of them in turn providing much more easier access to social media and related stuff with the help of Google Dorks using relevant search terms.
 	Lookups performed:
