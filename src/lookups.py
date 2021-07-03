@@ -14,6 +14,12 @@ class Lookups:
     def __init__(self) -> None:
         self.truecaller_instance = None
         self.phndir_instance = None
+        self.web_ui = False
+        self.browser = "chrome"
+
+    # displaying of the logo is only for the CLI, and is independent of an instance, there it has been a static method
+    @staticmethod
+    def display_logo():
         file = open("./helper_stuff/logo.txt", "r")
         print(colored(file.read(), "red"))
         file.close()
@@ -21,6 +27,16 @@ class Lookups:
     # sets the webdriver (browser) to firefox or chrome
     def set_browser(self, browser):
         self.browser = browser
+
+    # sets the web-UI to True, indicating that the user is going to use the web interface of this lookup tool
+    def set_web_ui(self):
+        self.web_ui = True
+
+    # sets microsoft details via the parent program if web UI is True
+    def set_microsoft_details(self, email_id, password):
+        self.email_id = email_id
+        self.password = password
+        self.microsoft_details = (self.email_id, self.password)
 
     # sets the phone no. based on input
     def set_number(self, string_no):
@@ -57,12 +73,19 @@ class Lookups:
         print("Done")
 
         # truecaller lookup (must have a microsoft account)
-        self.microsoft_flag = input("Do you have a microsoft account? (Y/n): ").lower()
+        if not self.web_ui:
+            self.microsoft_flag = input(
+                "Do you have a microsoft account? (Y/n): "
+            ).lower()
 
         if self.microsoft_flag != "n":
             print("Performing Truecaller Lookup...")
             self.truecaller_instance = truecaller_lookup.TrueCaller(
-                self.iso3166_code, self.national_no, self.browser
+                self.iso3166_code,
+                self.national_no,
+                self.browser,
+                self.web_ui,
+                self.microsoft_details,
             )
 
             # set truecaller flag to true upson successful lookup
@@ -76,9 +99,11 @@ class Lookups:
             auxillary.line()
 
         # phndir lookup (applicable only to Indian nos.)
-        self.phndir_scan_flag = input(
-            "Do you want to perform phndir scan? (Y/n): "
-        ).lower()
+        if not self.web_ui:
+            self.phndir_scan_flag = input(
+                "Do you want to perform phndir scan? (Y/n): "
+            ).lower()
+
         if self.phndir_scan_flag != "n":
             if self.country_code == 91:
                 print("Performing Phndir Lookup...")
@@ -120,6 +145,8 @@ class Lookups:
             )
             print("Done")
 
+    # NOTE: name lookups are displayed if atleast Truecaller or Phndir lookups is true
+
     def display_results(self):
 
         # no need to check if the local and numverify lookups have taken place since they are guaranteed to take place
@@ -157,4 +184,81 @@ class Lookups:
         ):
             self.name_google_dorks_instance.display_results(
                 auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+            )
+
+    # sets the results in order to be displayed in the web-UI
+    def set_results(self):
+        self.local_instance.set_results()
+        self.numverify_instance.set_results()
+        if self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status():
+            self.truecaller_instance.set_results()
+        if self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status():
+            self.phndir_instance.set_results()
+        self.number_google_dorks_instance.set_results()
+        if (
+            self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
+        ) or (
+            self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
+        ):
+            self.name_google_dorks_instance.set_results()
+
+    # returns the results in order to be displayed in the web-UI
+    def get_results(self):
+
+        # NOTE: the first argument passed in each of the return statements is a distinct no. which makes it easier to determine the actions to be taken
+        if (
+            self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
+        ) and (
+            self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
+        ):
+            return (
+                1,
+                self.local_instance.get_results(),
+                self.numverify_instance.get_results(),
+                self.truecaller_instance.get_results(),
+                self.phndir_instance.get_results(),
+                self.number_google_dorks_instance.get_results(),
+                self.name_google_dorks_instance.get_results(),
+            )
+
+        elif (
+            not (
+                self.microsoft_flag != "n"
+                and self.truecaller_instance.get_lookup_status()
+            )
+        ) and (
+            self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
+        ):
+            return (
+                2,
+                self.local_instance.get_results(),
+                self.numverify_instance.get_results(),
+                self.phndir_instance.get_results(),
+                self.number_google_dorks_instance.get_results(),
+                self.name_google_dorks_instance.get_results(),
+            )
+
+        elif (
+            self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
+        ) and (
+            not (
+                self.phndir_scan_flag != "n"
+                and self.phndir_instance.get_lookup_status()
+            )
+        ):
+            return (
+                3,
+                self.local_instance.get_results(),
+                self.numverify_instance.get_results(),
+                self.truecaller_instance.get_results(),
+                self.number_google_dorks_instance.get_results(),
+                self.name_google_dorks_instance.get_results(),
+            )
+
+        else:
+            return (
+                4,
+                self.local_instance.get_results(),
+                self.numverify_instance.get_results(),
+                self.number_google_dorks_instance.get_results(),
             )

@@ -16,11 +16,36 @@ class Numverify:
             + self.phone_no
         )
 
+    # method to handle the numverify lookup process
     def processes(self):
         self.response = requests.get(self.url)
         self.answer = self.response.json()
         return self.answer
 
+    # sets the results to be displayed in the web-UI
+    # creation of a dictionary for easier referencing
+    def set_results(self):
+        self.heading = "Numverify Lookup:"
+        self.dictionary = (
+            {
+                "Number": self.answer["number"],
+                "Local format": self.answer["local_format"],
+                "International format": self.answer["international_format"],
+                "Country prefix": self.answer["country_prefix"],
+                "Country code": self.answer["country_code"],
+                "Country": self.answer["country_name"],
+                "Location": self.answer["location"],
+                "Carrier": self.answer["carrier"],
+                "Line type": self.answer["line_type"],
+            },
+        )
+
+    # returns results to be displayed in the web-UI
+    # NOTE: the returned value is a tuple consisting of the heading for the lookup and a dictionary (for mapping)
+    def get_results(self):
+        return (self.heading, self.dictionary)
+
+    # returns results to be displayed in the CLI
     def display_results(self, color1, color2, color3):
         if self.answer["valid"]:
             print()

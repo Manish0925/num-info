@@ -1,0 +1,16 @@
+{% extends "base.html" %} {% block title %}num-info{% endblock %}
+{% block content %}
+<style>
+    #mydiv2 {
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        margin-top: -9em; /*set to a negative number 1/2 of your height*/
+        margin-left: -8em; /*set to a negative number 1/2 of your width*/
+    }
+</style>
+
+<div id="mydiv2" class="alert alert-warning" role="alert">
+    <p>Waiting for results to load...</p>
+</div>
+{% endblock %}

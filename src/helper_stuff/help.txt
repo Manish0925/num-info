@@ -2,12 +2,14 @@ NAME
 	num-info - an OSINT based tool to perform phone number lookups
 
 SYNOPSIS  
-	python num-info.py [-b | --browser <value>] [-s | --scan <number>] [-h | --help]
+	python num-info.py [-b | --browser <value>] [-e | --serve] [-s | --scan <number>] [-h | --help]
 
 DESCRIPTION  
 	num-info is a tool used to extract information by performing lookups on phone numbers using various OSINT techniques.
 	The turning point of this tool comes from the Truecaller and Phndir lookups. Alongside returning standard information, they also return username and email address.
 	Both of them in turn providing much more easier access to social media and related stuff with the help of Google Dorks using relevant search terms.
+	Only port 5000 is provided since other port numbers are not recommended in the web-UI using the flask server.
+	It can be used both via CLI and web-UI.
 	Lookups performed:
 		- Local Lookup:
 			Returns details from the local phone number library
@@ -35,6 +37,9 @@ OPTIONS
 		<value> can be one among the following
 			chrome (default)
 			firefox
+
+	-e , --serve
+		initiates the flask server as backend for the web-UI at port 5000
 
 	-s , --scan <number>
 		performs various scans/lookups based on the input and returns results

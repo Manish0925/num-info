@@ -1,0 +1,27 @@
+{% extends "base.html" %} {% block title %}num-info{% endblock %} {% block
+content %}
+<br />
+<br />
+<br />
+<style>
+    #mydiv {
+        position: fixed;
+        top: 55%;
+        left: 55%;
+        margin-top: -9em; /*set to a negative number 1/2 of your height*/
+        margin-left: -8em; /*set to a negative number 1/2 of your width*/
+    }
+    #mydiv1 {
+        position: fixed;
+        top: 70%;
+        left: 50%;
+        margin-top: -9em; /*set to a negative number 1/2 of your height*/
+        margin-left: -8em; /*set to a negative number 1/2 of your width*/
+    }
+</style>
+
+<div id="mydiv" class="alert alert-danger" role="alert">Error!</div>
+<div id="mydiv1" class="alert alert-warning" role="alert">
+    Incorrect number entered!
+</div>
+{% endblock %}

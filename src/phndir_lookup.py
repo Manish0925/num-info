@@ -76,21 +76,34 @@ class Phndir:
 
         return 0
 
+    # sets the lookup value to true, indicating that the lookup has taken place
     def set_lookup_status(self):
         self.lookup_status = True
 
+    # returns if or not the lookup has taken place
     def get_lookup_status(self):
         return self.lookup_status
 
-    def get_results(self):
-        return (
-            self.caller_name,
-            self.num_type,
-            self.carrier,
-            self.email_address,
-            self.local_time,
+    # sets the results in order to be displayed in the web UI
+    # creation of a dictionary for easier referencing
+    def set_results(self):
+        self.heading = "Phndir Lookup"
+        self.dictionary = (
+            {
+                "Name": self.caller_name,
+                "Number type": self.num_type,
+                "Carrier": self.carrier,
+                "Email address": self.email_address,
+                "Local time": self.local_time,
+            },
         )
 
+    # returns the results in order to be displayed in the web UI
+    # NOTE: the returned value is a tuple consisting of the heading for the lookup and a dictionary (for mapping)
+    def get_results(self):
+        return (self.heading, self.dictionary)
+
+    # displays results in the CLI
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()

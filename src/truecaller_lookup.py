@@ -10,7 +10,9 @@ import auxillary
 class TrueCaller:
 
     # initializes the instance attributes
-    def __init__(self, iso3166_code, phone_no, browser) -> None:
+    def __init__(
+        self, iso3166_code, phone_no, browser, web_ui, microsoft_details
+    ) -> None:
         self.iso3166_code = iso3166_code
         self.phone_no = phone_no
         self.url = (
@@ -18,6 +20,10 @@ class TrueCaller:
         )
         self.browser = browser
         self.lookup_status = False
+        self.web_ui = web_ui
+        if self.web_ui:
+            self.your_email_id = microsoft_details[0]
+            self.your_password = microsoft_details[1]
 
     # runs the Truecaller lookup process
     def process(self):
@@ -48,18 +54,21 @@ class TrueCaller:
         )
         microsoft_sign_in.click()
         sleep(2)
-        print()
-        auxillary.line()
-        print(
-            "Personal details required for enabling the required services\nNOTE: Details aren't stored"
-        )
-        auxillary.line()
-        print()
 
-        # signing in with microsoft account was the only option since google didn't allow signing-in due to security reasons
-        print("Microsoft Details:")
-        self.your_email_id = input("Email-ID            :    ")
-        self.your_password = getpass(prompt="Password            :    ")
+        if not self.web_ui:
+            print()
+            auxillary.line()
+            print(
+                "Personal details required for enabling the required services\nNOTE: Details aren't stored"
+            )
+            auxillary.line()
+            print()
+
+            # signing in with microsoft account was the only option since google didn't allow signing-in due to security reasons
+            print("Microsoft Details:")
+            self.your_email_id = input("Email-ID            :    ")
+            self.your_password = getpass(prompt="Password            :    ")
+
         your_email_id_input = driver.find_element_by_id("i0116")
         your_email_id_input.send_keys(self.your_email_id, Keys.RETURN)
 
@@ -101,21 +110,34 @@ class TrueCaller:
         driver.quit()
         return 0
 
+    # sets the lookup value to true, indicating that the lookup has taken place
     def set_lookup_status(self):
         self.lookup_status = True
 
+    # returns if or not the lookup has taken place
     def get_lookup_status(self):
         return self.lookup_status
 
-    def get_results(self):
-        return (
-            self.name,
-            self.email_id,
-            self.service_provider,
-            self.local_time,
-            self.location,
+    # sets the results in order to be displayed in the web UI
+    # creation of a dictionary for easier referencing
+    def set_results(self):
+        self.heading = "Truecaller Lookup"
+        self.dictionary = (
+            {
+                "Name": self.name,
+                "Email address": self.email_id,
+                "Service Provider": self.service_provider,
+                "Local time": self.local_time,
+                "Location": self.location,
+            },
         )
 
+    # returns the results in order to be displayed in the web UI
+    # NOTE: the returned value is a tuple consisting of the heading for the lookup and a dictionary (for mapping)
+    def get_results(self):
+        return (self.heading, self.dictionary)
+
+    # displays results in the CLI
     def display_results(self, color1, color2, color3):
         print()
         auxillary.line()

@@ -1,0 +1,104 @@
+{% extends "base.html" %} {% block title %}num-info{% endblock %}
+{% block content %}
+
+<h2>Results...</h3>
+<br>
+{% if results[0] == 1 %}
+	{% for attributes in results[1:5]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></h5>
+		{% for sub_attributes in attributes[1] %}
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sub_sub_attributes }}</b> : {{ sub_attributes[sub_sub_attributes] }}<br>
+			{% endfor %}
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
+	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[6][0] }}: </u></h5>
+	{% for attributes in results[6][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+{% elif results[0] == 2 %}
+	{% for attributes in results[1:4]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></h5>
+		{% for sub_attributes in attributes[1] %}
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sub_sub_attributes }}</b> : {{ sub_attributes[sub_sub_attributes] }}<br>
+			{% endfor %}
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[4][0] }}: </u></h5>
+	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
+	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+{% elif results[0] == 3 %}
+	{% for attributes in results[1:4]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></h5>
+		{% for sub_attributes in attributes[1] %}
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sub_sub_attributes }}</b> : {{ sub_attributes[sub_sub_attributes] }}<br>
+			{% endfor %}
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[4][0] }}: </u></h5>
+	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
+	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+{% else %}
+	{% for attributes in results[1:3]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></h5>
+		{% for sub_attributes in attributes[1] %}
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>{{ sub_sub_attributes }}</b> : {{ sub_attributes[sub_sub_attributes] }}<br>
+			{% endfor %}
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[3][0] }}: </u></h5>
+	{% for attributes in results[3][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		{% for i in attributes[1:] %}
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
+		{% endfor %}
+		<br>
+	{% endfor %}
+{% endif %}
+
+{% endblock %}

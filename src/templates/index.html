@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}num-info{% endblock %}
+{% block content %}
+<div class="my-md-3 container">
+    <div class="row">
+        <div class="container col-12">
+            <div>
+                <form action="#" method="post">
+                    <div
+                        id="input-group-1"
+                        role="group"
+                        class="form-group"
+                    >
+                        <label
+                            id="input-group-1__BV_label_"
+                            for="input-1"
+                            class="d-block"
+                            ><h5>Phone number :</h5></label
+                        >
+                        <div>
+                            <input
+                                id="input-number",
+                                name="name_input_number"
+                                type="tel"
+                                placeholder="e.g: 33678132393"
+                                required="required"
+                                aria-required="true"
+                                class="form-control"
+                            />
+                            <small
+                                tabindex="-1"
+                                id="input-group-1__BV_description_"
+                                class="form-text text-muted"
+                                >Only accepts E164 and International
+                                formats as input.</small
+                            >
+                        </div>
+                        <br />
+                    </div>
+                    <hr></h/>
+                    <div
+                        id="input-group-1"
+                        role="group"
+                        class="form-group"
+                    >
+                        <label
+                            id="input-group-1__BV_label_"
+                            for="input-1"
+                            class="d-block"
+                            ><h5
+                                >Optional Lookups: (recommended)</h5
+                            ></label
+                        >
+                        <br />
+
+                        <script>
+                            var login_credentials_zone='<div id="microsoft-sign-in-credentials-zone" name="name_microsoft_sign_in_credentials_zone">'
+                                login_credentials_zone += '<form action="#">'
+                                login_credentials_zone +='&nbsp;&nbsp;<label for="uname">Email address:</label><br>'
+                                login_credentials_zone +='&nbsp;&nbsp;<input type="email" id="uname" name="uname"><br>'
+                                login_credentials_zone +='&nbsp;&nbsp;<label for="pwsd">Password :</label><br>'
+                                login_credentials_zone +='&nbsp;&nbsp;<input type="password" id="pwsd" name="pwsd"><br>'
+                                login_credentials_zone +='</form>'
+                                login_credentials_zone +='</div>'
+                            function microsoft_login(){
+                                microsoft_sign_in_zone=document.getElementById("sign-in")
+                                microsoft_sign_in_zone.innerHTML=login_credentials_zone
+                            }
+                        </script>
+
+                        <form>
+                            <input
+                                type="checkbox"
+                                id="truecaller-lookup"
+                                name="name_truecaller_lookup"
+                                value="checked"
+                                onclick="microsoft_login()"
+                            />
+                            <label for="vehicle1"> Truecaller (Microsoft account required): </label
+                            >
+                            <p id="sign-in" name="microsoft_sign_in"></p>
+                            <input
+                                type="checkbox"
+                                id="phndir-lookup"
+                                name="name_phndir_lookup"
+                                value="checked"
+                            />
+                            <label for="vehicle2"> Phndir: </label
+                            ><br /><br />
+                            <button
+                                type="submit"
+                                class="btn m-1 btn-dark btn-sm"
+                                value="phone_no"
+                            >
+                                Run lookup
+                            </button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
