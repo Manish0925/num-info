@@ -147,13 +147,6 @@ if __name__ == "__main__":
                 checked_phndir = request.form.getlist("name_phndir_lookup")
                 session["phndir_flag"] = checked_phndir
 
-                print("String no.          :    ", session["string_no"])
-
-                print(
-                    "Truecaller flag     :    ",
-                    session["truecaller_flag"] == ["checked"],
-                )
-
                 # in case of truecaller lookup, since microsoft account is required and the details are to be entered in the web ui,
                 # i.e. the home page, the details have to be passed to the truecaller lookup function from this page itself
                 if session["truecaller_flag"] == ["checked"]:
@@ -162,8 +155,6 @@ if __name__ == "__main__":
                     session["your_email_id"] = microsoft_outlook_email_address
                     microsoft_outlook_password = request.form["pwsd"]
                     session["your_password"] = microsoft_outlook_password
-                    print("Your email address  :    ", session["your_email_id"])
-                    print("Your password       :    ", session["your_password"])
                     person_lookups.set_microsoft_details(
                         session["your_email_id"], session["your_password"]
                     )
@@ -175,10 +166,6 @@ if __name__ == "__main__":
                 else:
                     person_lookups.phndir_scan_flag = "n"
 
-                print(
-                    "Phndir flag         :    ", session["phndir_flag"] == ["checked"]
-                )
-
                 # redirected to the processes page that conveys that the processes are taking place
                 return redirect(url_for("ongoing"))
             else:
@@ -188,7 +175,6 @@ if __name__ == "__main__":
         # backend for processes page
         # NOTE: browser must be chosen only via the command-line-arguments
         def ongoing():
-            print(session["string_no"])
             string_no = session["string_no"]
             if len(string_no) <= 10:
                 return redirect(url_for("incorrect_input"))

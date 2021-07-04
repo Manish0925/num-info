@@ -16,6 +16,7 @@ class Lookups:
         self.phndir_instance = None
         self.web_ui = False
         self.browser = "chrome"
+        self.microsoft_details = None
 
     # displaying of the logo is only for the CLI, and is independent of an instance, there it has been a static method
     @staticmethod

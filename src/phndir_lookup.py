@@ -38,9 +38,11 @@ class Phndir:
         sleep(2)
 
         # NOTE: the elements in the webpage are either found with the help of their id (or) xpath
-        phone_no_input = driver.find_element_by_id("phone")
+        # phone_no_input = driver.find_element_by_id("phone")
+        phone_no_input = driver.find_element_by_xpath('//*[@id="phone"]')
         phone_no_input.send_keys(self.phone_no)
-        driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/span/button").click()
+        # driver.find_element_by_xpath("/html/body/div[2]/div/div[2]/span/button").click()
+        driver.find_element_by_xpath('//*[@id="query"]/span/button').click()
 
         sleep(3)
 
@@ -48,7 +50,7 @@ class Phndir:
         # exiting if the first entity is not found, since that indicates search limit being exceeded
         try:
             self.caller_name = driver.find_element_by_xpath(
-                "/html/body[@class='antialiased border-gray-200']/div[@id='results']/div[@class='mx-auto']/div[@class='mx-4 lg:flex max-w-6xl bg-white shadow-lg rounded-lg overflow-hidden']/div[@class='bg-white w-full lg:w-8/12 shadow overflow-hidden sm:rounded-lg']/div[@class='border-t border-gray-200']/dl/div[@class='bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6'][1]/dd[@class='mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2']"
+                '//*[@id="results"]/div/div[1]/div[1]/div[2]/dl/div[1]/dd'
             ).text.title()
         except NoSuchElementException:
             auxillary.line()
@@ -59,16 +61,16 @@ class Phndir:
             driver.quit()
             return -1
         self.num_type = driver.find_element_by_xpath(
-            "/html/body/div[4]/div/div[1]/div[1]/div[2]/dl/div[2]/dd/span"
+            '//*[@id="results"]/div/div[1]/div[1]/div[2]/dl/div[2]/dd/span'
         ).text.upper()
         self.carrier = driver.find_element_by_xpath(
-            "/html/body/div[4]/div/div[1]/div[1]/div[2]/dl/div[3]/dd"
+            '//*[@id="results"]/div/div[1]/div[1]/div[2]/dl/div[3]/dd'
         ).text.title()
         self.email_address = driver.find_element_by_xpath(
-            "/html/body/div[4]/div/div[1]/div[1]/div[2]/dl/div[4]/dd"
+            '//*[@id="results"]/div/div[1]/div[1]/div[2]/dl/div[4]/dd'
         ).text.lower()
         self.local_time = driver.find_element_by_xpath(
-            "/html/body/div[4]/div/div[1]/div[1]/div[2]/dl/div[5]/dd"
+            '//*[@id="results"]/div/div[1]/div[1]/div[2]/dl/div[5]/dd'
         ).text.title()
 
         # quits the browser

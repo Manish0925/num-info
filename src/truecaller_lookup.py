@@ -24,6 +24,9 @@ class TrueCaller:
         if self.web_ui:
             self.your_email_id = microsoft_details[0]
             self.your_password = microsoft_details[1]
+        else:
+            self.your_email_id = None
+            self.your_password = None
 
     # runs the Truecaller lookup process
     def process(self):
@@ -48,10 +51,8 @@ class TrueCaller:
         # NOTE: sleep functions are in order to ensure that the webpage gets fully loaded
         sleep(2)
 
-        # NOTE: the elements in the webpage are either found with the help of their id (or) xpath
-        microsoft_sign_in = driver.find_element_by_xpath(
-            "/html/body/div[1]/main/div/a[2]"
-        )
+        # NOTE: the elements in the webpage are either found with the help of their xpath
+        microsoft_sign_in = driver.find_element_by_xpath('//*[@id="app"]/main/div/a[2]')
         microsoft_sign_in.click()
         sleep(2)
 
@@ -69,12 +70,12 @@ class TrueCaller:
             self.your_email_id = input("Email-ID            :    ")
             self.your_password = getpass(prompt="Password            :    ")
 
-        your_email_id_input = driver.find_element_by_id("i0116")
+        your_email_id_input = driver.find_element_by_xpath('//*[@id="i0116"]')
         your_email_id_input.send_keys(self.your_email_id, Keys.RETURN)
 
         sleep(4)
 
-        your_password_input = driver.find_element_by_id("i0118")
+        your_password_input = driver.find_element_by_xpath('//*[@id="i0118"]')
         your_password_input.send_keys(self.your_password, Keys.RETURN)
 
         sleep(6)
@@ -83,27 +84,27 @@ class TrueCaller:
         # exiting if the first entity is not found, since that indicates search limit being exceeded
         try:
             self.name = driver.find_element_by_xpath(
-                "/html/body/div[1]/main/div/div[1]/div[1]/header/div[2]/h1/span"
+                '//*[@id="app"]/main/div/div[1]/div[1]/header/div[2]/h1/span'
             ).text.title()
         except NoSuchElementException:
             print("Issue could be one among the following:")
-            print("- Incorrect username\n-Incorrect password")
+            print("- Incorrect username\n- Incorrect password")
             print(
                 "- Search limit exceeded. Try again in a day or use a different microsoft account."
             )
             driver.quit()
             return -1
         self.email_id = driver.find_element_by_xpath(
-            "/html/body/div[1]/main/div/div[1]/div[2]/a[2]/div"
+            '//*[@id="app"]/main/div/div[1]/div[2]/a[2]/div'
         ).text.lower()
         self.service_provider = driver.find_element_by_xpath(
-            "/html/body/div[1]/main/div/div[1]/div[2]/a[1]/div/div[2]"
+            '//*[@id="app"]/main/div/div[1]/div[2]/a[1]/div/div[2]'
         ).text.title()
         self.local_time = driver.find_element_by_xpath(
-            "/html/body/div[1]/main/div/div[1]/div[2]/a[3]/div/div[2]"
+            '//*[@id="app"]/main/div/div[1]/div[2]/a[3]/div/div[2]'
         ).text.title()
         self.location = driver.find_element_by_xpath(
-            "/html/body/div[1]/main/div/div[1]/div[2]/a[3]/div/div[1]"
+            '//*[@id="app"]/main/div/div[1]/div[2]/a[3]/div/div[1]'
         ).text.title()
 
         # quits the browser
