@@ -18,7 +18,7 @@ class Lookups:
         self.browser = "chrome"
         self.microsoft_details = None
 
-    # displaying of the logo is only for the CLI, and is independent of an instance, there it has been a static method
+    # displaying of the logo is only for the CLI, and is independent of an instance, therefore it has been a static method
     @staticmethod
     def display_logo():
         file = open("./helper_stuff/logo.txt", "r")
@@ -33,7 +33,7 @@ class Lookups:
     def set_web_ui(self):
         self.web_ui = True
 
-    # sets microsoft details via the parent program if web UI is True
+    # sets microsoft details via the parent program if web-UI is True
     def set_microsoft_details(self, email_id, password):
         self.email_id = email_id
         self.password = password
@@ -207,6 +207,8 @@ class Lookups:
     def get_results(self):
 
         # NOTE: the first argument passed in each of the return statements is a distinct no. which makes it easier to determine the actions to be taken
+
+        # if both optional lookups have taken place
         if (
             self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
         ) and (
@@ -222,6 +224,7 @@ class Lookups:
                 self.name_google_dorks_instance.get_results(),
             )
 
+        # if only phndir lookup has taken place among the optional lookups
         elif (
             not (
                 self.microsoft_flag != "n"
@@ -239,6 +242,7 @@ class Lookups:
                 self.name_google_dorks_instance.get_results(),
             )
 
+        # if only truecaller lookup has taken place among the optional lookups
         elif (
             self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
         ) and (
@@ -256,6 +260,7 @@ class Lookups:
                 self.name_google_dorks_instance.get_results(),
             )
 
+        # if none of the optional lookups has taken place
         else:
             return (
                 4,

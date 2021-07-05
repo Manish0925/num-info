@@ -1,11 +1,9 @@
 import sys
 
-from flask.scaffold import F
 from phonenumbers.phonenumberutil import is_valid_number
 from phonenumbers import parse
 import lookups
 import auxillary
-from termcolor import colored
 
 # default browser is chrome, can be set to firefox via command line args
 browser = "chrome"
