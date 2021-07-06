@@ -102,6 +102,7 @@ class Phndir:
 
     # returns the results in order to be displayed in the web UI
     # NOTE: the returned value is a tuple consisting of the heading for the lookup and a dictionary (for mapping)
+    # returns most updated service provider (helpful in identifying if the person has changed the service provider for the given number)
     def get_results(self):
         return (self.heading, self.dictionary)
 
