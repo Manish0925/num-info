@@ -24,33 +24,36 @@ class Local:
         self.carrier = carrier.name_for_number(self.parse_details, "en")
 
     # runs the Local lookup process
-    def display_results(self, color1, color2, color3):
+    def display_results(self, colors):
         print()
         auxillary.line()
-        print(colored("Local Lookup Results:", color1))
+        print(colored("Local Lookup Results:", colors[0]))
         auxillary.line()
         print(
-            colored("National format     :    ", color2),
-            colored(self.national_no, color3),
+            colored("National format     :    ", colors[1]),
+            colored(self.national_no, colors[2]),
         )
 
         print(
-            colored("E164 format         :    ", color2), colored(self.e164_no, color3)
+            colored("E164 format         :    ", colors[1]),
+            colored(self.e164_no, colors[2]),
         )
 
         print(
-            colored("International format:    ", color2),
-            colored(self.international_no, color3),
+            colored("International format:    ", colors[1]),
+            colored(self.international_no, colors[2]),
         )
         print(
-            colored("Country Code        :    ", color2),
-            colored(self.country_code, color3),
+            colored("Country Code        :    ", colors[1]),
+            colored(self.country_code, colors[2]),
         )
         print(
-            colored("Country             :    ", color2), colored(self.country, color3)
+            colored("Country             :    ", colors[1]),
+            colored(self.country, colors[2]),
         )
         print(
-            colored("Carrier             :    ", color2), colored(self.carrier, color3)
+            colored("Carrier             :    ", colors[1]),
+            colored(self.carrier, colors[2]),
         )
         auxillary.line()
 

@@ -66,12 +66,12 @@ class NumberGoogleDorksLookup:
 
     # returns links in by adding OR operators to various number formats
     # method to display results in the CLI
-    def display_results(self, color1, color2, color3):
+    def display_results(self, colors):
         print()
         auxillary.line()
-        print(colored("Google Dorks Number Lookup Results:", color1))
+        print(colored("Google Dorks Number Lookup Results:", colors[0]))
         auxillary.line()
-        print(colored("General footprints", color2))
+        print(colored("General footprints", colors[1]))
         print(
             colored(
                 "https://www.google.com/search?q=intext%3A%22"
@@ -90,7 +90,7 @@ class NumberGoogleDorksLookup:
                 + "intext%3A%22"
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22",
-                color3,
+                colors[2],
             )
         )
         print(
@@ -111,11 +111,11 @@ class NumberGoogleDorksLookup:
                 + "intext%3A%22"
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22",
-                color3,
+                colors[2],
             )
         )
         auxillary.line()
-        print(colored("Social networks footprints", color2))
+        print(colored("Social networks footprints", colors[1]))
         for i in self.social_network_sites:
             url = (
                 "https://www.google.com/search?q=site"
@@ -145,9 +145,9 @@ class NumberGoogleDorksLookup:
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22"
             )
-            print(colored(url, color3))
+            print(colored(url, colors[2]))
         auxillary.line()
-        print(colored("Individual footprints", color2))
+        print(colored("Individual footprints", colors[1]))
         for i in self.individual_sites:
             url = (
                 "https://www.google.com/search?q=site"
@@ -177,9 +177,9 @@ class NumberGoogleDorksLookup:
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22"
             )
-            print(colored(url, color3))
+            print(colored(url, colors[2]))
         auxillary.line()
-        print(colored("Reputation footprints", color2))
+        print(colored("Reputation footprints", colors[1]))
         for i in self.reputation_sites:
             url = (
                 "https://www.google.com/search?q=site"
@@ -209,9 +209,9 @@ class NumberGoogleDorksLookup:
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22"
             )
-            print(colored(url, color3))
+            print(colored(url, colors[2]))
         auxillary.line()
-        print(colored("Temporary Sites footprints", color2))
+        print(colored("Temporary Sites footprints", colors[1]))
         for i in self.temporary_providers:
             url = (
                 "https://www.google.com/search?q=site"
@@ -241,7 +241,7 @@ class NumberGoogleDorksLookup:
                 + self.number[len(str(self.parsed_number.country_code)) + 1 :]
                 + "%22"
             )
-            print(colored(url, color3))
+            print(colored(url, colors[2]))
         auxillary.line()
 
     # NOTE: the returned entities in each of the results are tuples which may consist of strings (or) tuples

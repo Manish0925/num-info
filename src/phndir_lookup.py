@@ -107,27 +107,29 @@ class Phndir:
         return (self.heading, self.dictionary)
 
     # displays results in the CLI
-    def display_results(self, color1, color2, color3):
+    def display_results(self, colors):
         print()
         auxillary.line()
-        print(colored("Phndir Lookup Results:", color1))
+        print(colored("Phndir Lookup Results:", colors[0]))
         auxillary.line()
         print(
-            colored("Caller name         :    ", color2),
-            colored(self.caller_name, color3),
+            colored("Caller name         :    ", colors[1]),
+            colored(self.caller_name, colors[2]),
         )
         print(
-            colored("Number type         :    ", color2), colored(self.num_type, color3)
+            colored("Number type         :    ", colors[1]),
+            colored(self.num_type, colors[2]),
         )
         print(
-            colored("Carrier             :    ", color2), colored(self.carrier, color3)
+            colored("Carrier             :    ", colors[1]),
+            colored(self.carrier, colors[2]),
         )
         print(
-            colored("Email Address       :    ", color2),
-            colored(self.email_address, color3),
+            colored("Email Address       :    ", colors[1]),
+            colored(self.email_address, colors[2]),
         )
         print(
-            colored("Local Time          :    ", color2),
-            colored(self.local_time, color3),
+            colored("Local Time          :    ", colors[1]),
+            colored(self.local_time, colors[2]),
         )
         auxillary.line()

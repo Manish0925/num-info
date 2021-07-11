@@ -1,7 +1,11 @@
 {% extends "base.html" %} {% block title %}num-info{% endblock %}
 {% block content %}
 
-<h2>Results...</h2>
+<style>
+	h2   {text-align: center;}
+</style>
+
+<h2 text-align="center">RESULTS</h2>
 <br>
 
 <!-- if both optional lookups have taken place -->
@@ -20,16 +24,25 @@
 		{% endfor %}
 		<br>
 	{% endfor %}
-	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}</u></h5>
+	<table  style = "border: 1px solid black; margin: 20px">
 	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+			<td  style = "border: 1px solid black">{{ attributes }}</td> 
+			<td  style = "border: 1px solid black">{{ results[5][1][attributes] }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[6][0] }}: </u></h5>
+	{% for attributes in results[6][1] %}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
 		{% for i in attributes[1:] %}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
 		{% endfor %}
 		<br>
 	{% endfor %}
-	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[6][0] }}: </u></h5>
-	{% for attributes in results[6][1] %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[7][0] }}: </u></h5>
+	{% for attributes in results[7][1] %}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
 		{% for i in attributes[1:] %}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
@@ -53,16 +66,25 @@
 		{% endfor %}
 		<br>
 	{% endfor %}
-	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[4][0] }}: </u></h5>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[4][0] }}</u></h5>
+	<table  style = "border: 1px solid black; margin: 20px">
 	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+			<td  style = "border: 1px solid black">{{ attributes }}</td> 
+			<td  style = "border: 1px solid black">{{ results[4][1][attributes] }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
+	{% for attributes in results[5][1] %}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
 		{% for i in attributes[1:] %}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>
 		{% endfor %}
 		<br>
 	{% endfor %}
-	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[5][0] }}: </u></h5>
-	{% for attributes in results[5][1] %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ results[6][0] }}: </u></h5>
+	{% for attributes in results[6][1] %}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
 		{% for i in attributes[1:] %}
 			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href={{ i }}>{{i}}</a><br>

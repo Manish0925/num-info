@@ -25,6 +25,7 @@ DESCRIPTION
 			Returns details from the Phndir website.
 			* Salient feature
 				> Provides latest service provider for a phone number (unlike others providing original/default ones)
+				> Service provider returned by phndir compared with service provider returned by local upon successful phndir lookup
 			* Limitations
 				> Email address masked with '*' characters to some extent
 				> Only 4 searches possible per day with a given IP address

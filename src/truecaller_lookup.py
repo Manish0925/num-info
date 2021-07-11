@@ -139,24 +139,29 @@ class TrueCaller:
         return (self.heading, self.dictionary)
 
     # displays results in the CLI
-    def display_results(self, color1, color2, color3):
+    def display_results(self, colors):
         print()
         auxillary.line()
-        print(colored("Truecaller Lookup Results:", color1))
+        print(colored("Truecaller Lookup Results:", colors[0]))
         auxillary.line()
-        print(colored("Name                :    ", color2), colored(self.name, color3))
         print(
-            colored("Email-ID            :    ", color2), colored(self.email_id, color3)
+            colored("Name                :    ", colors[1]),
+            colored(self.name, colors[2]),
         )
         print(
-            colored("Service Provider    :    ", color2),
-            colored(self.service_provider, color3),
+            colored("Email-ID            :    ", colors[1]),
+            colored(self.email_id, colors[2]),
         )
         print(
-            colored("Local Time          :    ", color2),
-            colored(self.local_time, color3),
+            colored("Service Provider    :    ", colors[1]),
+            colored(self.service_provider, colors[2]),
         )
         print(
-            colored("Location            :    ", color2), colored(self.location, color3)
+            colored("Local Time          :    ", colors[1]),
+            colored(self.local_time, colors[2]),
+        )
+        print(
+            colored("Location            :    ", colors[1]),
+            colored(self.location, colors[2]),
         )
         auxillary.line()

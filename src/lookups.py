@@ -114,7 +114,7 @@ class Lookups:
                 if self.phndir_instance.process() != -1:
                     self.phndir_instance.set_lookup_status()
                     print("Done")
-            else:
+
                 auxillary.line()
                 print("Phndir lookup only applicable to Indian nos.")
                 auxillary.line()
@@ -152,30 +152,35 @@ class Lookups:
 
         # no need to check if the local and numverify lookups have taken place since they are guaranteed to take place
 
-        self.local_instance.display_results(
-            auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-        )
+        self.local_instance.display_results(auxillary.colors)
 
-        self.numverify_instance.display_results(
-            auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-        )
+        self.numverify_instance.display_results(auxillary.colors)
 
         # display truecaller results only if the truecaller lookup has taken place
         if self.microsoft_flag == "y" and self.truecaller_instance.get_lookup_status():
-            self.truecaller_instance.display_results(
-                auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-            )
+            self.truecaller_instance.display_results(auxillary.colors)
 
         # display phndir results only if the phndir lookup has taken place
         if self.phndir_scan_flag == "y" and self.phndir_instance.get_lookup_status():
-            self.phndir_instance.display_results(
-                auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
+            self.phndir_instance.display_results(auxillary.colors)
+
+            # displays the initial and current service provider(s)
+            print()
+            auxillary.line()
+            print(colored("Service Provider Comparison:", auxillary.colors[0]))
+            auxillary.line()
+            print(
+                colored("Initial             :    ", auxillary.colors[1]),
+                colored(self.local_instance.carrier, auxillary.colors[2]),
             )
+            print(
+                colored("Current             :    ", auxillary.colors[1]),
+                colored(self.phndir_instance.carrier, auxillary.colors[2]),
+            )
+            auxillary.line()
 
         # display google dorks phone number results
-        self.number_google_dorks_instance.display_results(
-            auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-        )
+        self.number_google_dorks_instance.display_results(auxillary.colors)
 
         # display google dorks phone name results (only if either of phndir or truecaller lookup has succeeded)
         if (
@@ -183,9 +188,16 @@ class Lookups:
         ) or (
             self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status()
         ):
-            self.name_google_dorks_instance.display_results(
-                auxillary.colors[0], auxillary.colors[1], auxillary.colors[2]
-            )
+            self.name_google_dorks_instance.display_results(auxillary.colors)
+
+    def get_service_provider_comparison(self):
+        return (
+            "Service Provider Comparison",
+            {
+                "Initial": self.local_instance.carrier,
+                "Current": self.phndir_instance.carrier,
+            },
+        )
 
     # sets the results in order to be displayed in the web-UI
     def set_results(self):
@@ -220,6 +232,7 @@ class Lookups:
                 self.numverify_instance.get_results(),
                 self.truecaller_instance.get_results(),
                 self.phndir_instance.get_results(),
+                self.get_service_provider_comparison(),
                 self.number_google_dorks_instance.get_results(),
                 self.name_google_dorks_instance.get_results(),
             )
@@ -238,6 +251,7 @@ class Lookups:
                 self.local_instance.get_results(),
                 self.numverify_instance.get_results(),
                 self.phndir_instance.get_results(),
+                self.get_service_provider_comparison(),
                 self.number_google_dorks_instance.get_results(),
                 self.name_google_dorks_instance.get_results(),
             )

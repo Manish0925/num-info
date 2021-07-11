@@ -46,46 +46,46 @@ class Numverify:
         return (self.heading, self.dictionary)
 
     # returns results to be displayed in the CLI
-    def display_results(self, color1, color2, color3):
+    def display_results(self, colors):
         if self.answer["valid"]:
             print()
             auxillary.line()
-            print(colored("Numverify Lookup Results:", color1))
+            print(colored("Numverify Lookup Results:", colors[0]))
             auxillary.line()
             print(
-                colored("Number              :    ", color2),
-                colored(self.answer["number"], color3),
+                colored("Number              :    ", colors[1]),
+                colored(self.answer["number"], colors[2]),
             )
             print(
-                colored("Local format        :    ", color2),
-                colored(self.answer["local_format"], color3),
+                colored("Local format        :    ", colors[1]),
+                colored(self.answer["local_format"], colors[2]),
             )
             print(
-                colored("International format:    ", color2),
-                colored(self.answer["international_format"], color3),
+                colored("International format:    ", colors[1]),
+                colored(self.answer["international_format"], colors[2]),
             )
             print(
-                colored("Country prefix      :    ", color2),
-                colored(self.answer["country_prefix"], color3),
+                colored("Country prefix      :    ", colors[1]),
+                colored(self.answer["country_prefix"], colors[2]),
             )
             print(
-                colored("Country code        :    ", color2),
-                colored(self.answer["country_code"], color3),
+                colored("Country code        :    ", colors[1]),
+                colored(self.answer["country_code"], colors[2]),
             )
             print(
-                colored("Country name        :    ", color2),
-                colored(self.answer["country_name"], color3),
+                colored("Country name        :    ", colors[1]),
+                colored(self.answer["country_name"], colors[2]),
             )
             print(
-                colored("Location            :    ", color2),
-                colored(self.answer["location"], color3),
+                colored("Location            :    ", colors[1]),
+                colored(self.answer["location"], colors[2]),
             )
             print(
-                colored("Carrier             :    ", color2),
-                colored(self.answer["carrier"], color3),
+                colored("Carrier             :    ", colors[1]),
+                colored(self.answer["carrier"], colors[2]),
             )
             print(
-                colored("Line type           :    ", color2),
-                colored(self.answer["line_type"], color3),
+                colored("Line type           :    ", colors[1]),
+                colored(self.answer["line_type"], colors[2]),
             )
             auxillary.line()
