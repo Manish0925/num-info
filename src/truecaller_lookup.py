@@ -49,14 +49,14 @@ class TrueCaller:
         driver.get(self.url)
 
         # NOTE: sleep functions are in order to ensure that the webpage gets fully loaded
-        sleep(2)
+        sleep(3)
 
         # NOTE: the elements in the webpage are either found with the help of their xpath
         microsoft_sign_in = driver.find_element_by_xpath('//*[@id="app"]/main/div/a[2]')
         microsoft_sign_in.click()
-        sleep(2)
 
         if not self.web_ui:
+            sleep(3)
             print()
             auxillary.line()
             print(
@@ -70,10 +70,19 @@ class TrueCaller:
             self.your_email_id = input("Email-ID            :    ")
             self.your_password = getpass(prompt="Password            :    ")
 
+        sleep(3)
         your_email_id_input = driver.find_element_by_xpath('//*[@id="i0116"]')
         your_email_id_input.send_keys(self.your_email_id, Keys.RETURN)
 
         sleep(4)
+
+        security = driver.find_elements_by_xpath('//*[@id="idA_PWD_SwitchToCredPicker"]')
+        if len(security) != 0:
+            security[0].click()
+            sleep(2)
+            driver.find_element_by_xpath('//*[@id="credentialList"]/div[3]/div/div/div[2]').click()
+
+        sleep(2)
 
         your_password_input = driver.find_element_by_xpath('//*[@id="i0118"]')
         your_password_input.send_keys(self.your_password, Keys.RETURN)

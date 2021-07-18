@@ -60,12 +60,12 @@ class Local:
     # sets results to be displayed in the web-UI
     # creation of a dictionary for easier referencing
     def set_results(self):
-        self.heading = "Local Lookup:"
+        self.heading = "Local Lookup"
         self.dictionary = (
             {
-                "Phone no.": self.phone_no,
+                "Number": self.phone_no,
                 "National format": self.national_no,
-                "Internaitonal format": self.international_no,
+                "International format": self.international_no,
                 "E164 format": self.e164_no,
                 "Country code": self.country_code,
                 "Country": self.country,

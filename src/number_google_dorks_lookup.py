@@ -252,22 +252,70 @@ class NumberGoogleDorksLookup:
         self.general_footprints_urls = (
             "General Footprints",
             (
-                "https://www.google.com/search?q=intext%3A%22%2B"
-                + self.number[1:]
-                + "%22+OR+intext%3A%22"
-                + self.number[1:]
-                + "%22+OR+intext%3A%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    "https://www.google.com/search?q=intext%3A%22%2B"
+                    + self.number[1:]
+                    + "%22+OR+intext%3A%22"
+                    + self.number[1:]
+                    + "%22+OR+intext%3A%22"
+                    + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                    + "%22"
+                ),
+                (
+                    "intext:"
+                    + '"'
+                    + "+"
+                    + self.number[1:]
+                    + '"'
+                    + " "
+                    + "OR"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + self.number[1:]
+                    + '"'
+                    + " "
+                    + "OR"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                    + '"'
+                ),
             ),
             (
-                "https://www.google.com/search?q=%28ext%3Adoc+OR+ext%3Adocx+OR+ext%3Aodt+OR+ext%3Apdf+OR+ext%3Artf+OR+ext%3Asxw+OR+ext%3Apsw+OR+ext%3Appt+OR+ext%3Apptx+OR+ext%3Apps+OR+ext%3Acsv+OR+ext%3Atxt+OR+ext%3Axls%29+intext%3A%22"
-                + self.number[1:]
-                + "%22+OR+intext%3A%22"
-                + self.number[1:]
-                + "%22+OR+intext%3A%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    "https://www.google.com/search?q=%28ext%3Adoc+OR+ext%3Adocx+OR+ext%3Aodt+OR+ext%3Apdf+OR+ext%3Artf+OR+ext%3Asxw+OR+ext%3Apsw+OR+ext%3Appt+OR+ext%3Apptx+OR+ext%3Apps+OR+ext%3Acsv+OR+ext%3Atxt+OR+ext%3Axls%29+intext%3A%22"
+                    + self.number[1:]
+                    + "%22+OR+intext%3A%22"
+                    + self.number[1:]
+                    + "%22+OR+intext%3A%22"
+                    + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                    + "%22"
+                ),
+                (
+                    "(ext:doc OR ext:docx OR ext:odt OR ext:pdf OR ext:rtf OR ext:sxw OR ext:psw OR ext:ppt OR ext:pptx OR ext:pps OR ext:csv OR ext:txt OR ext:xls)"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + "+"
+                    + self.number[1:]
+                    + '"'
+                    + " "
+                    + "OR"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + self.number[1:]
+                    + '"'
+                    + " "
+                    + "OR"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                    + '"'
+                ),
             ),
         )
 
@@ -275,32 +323,60 @@ class NumberGoogleDorksLookup:
 
         for i in self.social_network_sites:
             self.social_network_sites_urls.append(
-                "https://www.google.com/search?q=site"
-                + "%3A"
-                + i
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + "%2B"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site"
+                        + "%3A"
+                        + i
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + "%2B"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + "%22"
+                    ),
+                    (
+                        "site:"
+                        + i
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + "+"
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + '"'
+                    ),
+                ),
             )
 
         self.social_network_sites_urls = tuple(self.social_network_sites_urls)
@@ -309,32 +385,58 @@ class NumberGoogleDorksLookup:
 
         for i in self.individual_sites:
             self.individual_sites_urls.append(
-                "https://www.google.com/search?q=site"
-                + "%3A"
-                + i
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + "%2B"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site"
+                        + "%3A"
+                        + i
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + "%2B"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + "%22"
+                    ),
+                    (
+                        "site:" + i + " "
+                        "intext:"
+                        + '"'
+                        + "+"
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + '"'
+                    ),
+                ),
             )
 
         self.individual_sites_urls = tuple(self.individual_sites_urls)
@@ -343,32 +445,58 @@ class NumberGoogleDorksLookup:
 
         for i in self.reputation_sites:
             self.reputation_sites_urls.append(
-                "https://www.google.com/search?q=site"
-                + "%3A"
-                + i
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + "%2B"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site"
+                        + "%3A"
+                        + i
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + "%2B"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + "%22"
+                    ),
+                    (
+                        "site:" + i + " "
+                        "intext:"
+                        + '"'
+                        + "+"
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + '"'
+                    ),
+                ),
             )
 
         self.reputation_sites_urls = tuple(self.reputation_sites_urls)
@@ -377,32 +505,58 @@ class NumberGoogleDorksLookup:
 
         for i in self.temporary_providers:
             self.temporary_providers_urls.append(
-                "https://www.google.com/search?q=site"
-                + "%3A"
-                + i
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + "%2B"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[1:]
-                + "%22"
-                + "+"
-                + "OR"
-                + "+"
-                + "intext"
-                + "%3A"
-                + "%22"
-                + self.number[len(str(self.parsed_number.country_code)) + 1 :]
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site"
+                        + "%3A"
+                        + i
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + "%2B"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[1:]
+                        + "%22"
+                        + "+"
+                        + "OR"
+                        + "+"
+                        + "intext"
+                        + "%3A"
+                        + "%22"
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + "%22"
+                    ),
+                    (
+                        "site:" + i + " "
+                        "intext:"
+                        + '"'
+                        + "+"
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[1:]
+                        + '"'
+                        + " "
+                        + "OR"
+                        + " "
+                        + "intext:"
+                        + '"'
+                        + self.number[len(str(self.parsed_number.country_code)) + 1 :]
+                        + '"'
+                    ),
+                ),
             )
 
         self.temporary_providers_urls = tuple(self.temporary_providers_urls)

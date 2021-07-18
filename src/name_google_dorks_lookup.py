@@ -79,11 +79,24 @@ class NameGoogleDorksLookup:
     def set_results(self):
         self.general_footprints_urls = (
             "General Footprints",
-            ("https://www.google.com/search?q=intext%3A%22" + self.name + "%22"),
             (
-                "https://www.google.com/search?q=%28ext%3Adoc+OR+ext%3Adocx+OR+ext%3Aodt+OR+ext%3Apdf+OR+ext%3Artf+OR+ext%3Asxw+OR+ext%3Apsw+OR+ext%3Appt+OR+ext%3Apptx+OR+ext%3Apps+OR+ext%3Acsv+OR+ext%3Atxt+OR+ext%3Axls%29+intext%3A%22"
-                + self.name
-                + "%22"
+                ("https://www.google.com/search?q=intext%3A%22" + self.name + "%22"),
+                ("intext:" + '"' + self.name + '"'),
+            ),
+            (
+                (
+                    "https://www.google.com/search?q=%28ext%3Adoc+OR+ext%3Adocx+OR+ext%3Aodt+OR+ext%3Apdf+OR+ext%3Artf+OR+ext%3Asxw+OR+ext%3Apsw+OR+ext%3Appt+OR+ext%3Apptx+OR+ext%3Apps+OR+ext%3Acsv+OR+ext%3Atxt+OR+ext%3Axls%29+intext%3A%22"
+                    + self.name
+                    + "%22"
+                ),
+                (
+                    "(ext:doc OR ext:docx OR ext:odt OR ext:pdf OR ext:rtf OR ext:sxw OR ext:psw OR ext:ppt OR ext:pptx OR ext:pps OR ext:csv OR ext:txt OR ext:xls)"
+                    + " "
+                    + "intext:"
+                    + '"'
+                    + self.name
+                    + '"'
+                ),
             ),
         )
 
@@ -91,11 +104,16 @@ class NameGoogleDorksLookup:
 
         for i in self.social_network_sites:
             self.social_network_sites_urls.append(
-                "https://www.google.com/search?q=site%3A"
-                + i
-                + "+intext%3A%22"
-                + self.name
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site%3A"
+                        + i
+                        + "+intext%3A%22"
+                        + self.name
+                        + "%22"
+                    ),
+                    ("site:" + i + " " + "intext:" + '"' + self.name + '"'),
+                ),
             )
 
         self.social_network_sites_urls = tuple(self.social_network_sites_urls)
@@ -104,11 +122,16 @@ class NameGoogleDorksLookup:
 
         for i in self.individual_sites:
             self.individual_sites_urls.append(
-                "https://www.google.com/search?q=site%3A"
-                + i
-                + "+intext%3A%22"
-                + self.name
-                + "%22"
+                (
+                    (
+                        "https://www.google.com/search?q=site%3A"
+                        + i
+                        + "+intext%3A%22"
+                        + self.name
+                        + "%22"
+                    ),
+                    ("site:" + i + " " + "intext:" + '"' + self.name + '"'),
+                )
             )
 
         self.individual_sites_urls = tuple(self.individual_sites_urls)

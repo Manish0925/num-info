@@ -25,7 +25,7 @@ class Numverify:
     # sets the results to be displayed in the web-UI
     # creation of a dictionary for easier referencing
     def set_results(self):
-        self.heading = "Numverify Lookup:"
+        self.heading = "Numverify Lookup"
         self.dictionary = (
             {
                 "Number": self.answer["number"],

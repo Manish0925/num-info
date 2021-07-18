@@ -50,3 +50,8 @@ OPTIONS
 
 	-h , --help
 		prints this help page
+
+AUTHORS:
+	Manish and Harshita
+	July 25, 2021
+	
