@@ -13,7 +13,7 @@
 	<hr>
 </div>
 
-<!-- if both optional lookups have taken place -->
+<!-- if both optional lookups have taken place-->
 {% if results[0] == 1 %}
 	{% for attributes in results[1:5]  %}
 		<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
@@ -181,7 +181,7 @@
 	{% endfor %}
 
 <!-- if none of the optional lookups have taken place -->
-{% else %}
+{% elif results[0] == 4 %}
 	{% for attributes in results[1:3]  %}
 		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
 			<h5 display:inline>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
@@ -203,6 +203,207 @@
 	<hr>
 	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[3][0] }} </h5><br><br>
 	{% for attributes in results[3][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u></u>{{ attributes[0] }}:</u></b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a><br>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+<!-- if both optional lookups have taken place but not numverify -->
+{% elif results[0] == 5 %}
+	{% for attributes in results[1:4]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
+		{% for sub_attributes in attributes[1] %}
+			<table style = "border: 1px solid black; margin: 20px; width: 900px;">
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr style = "border: 1px solid black">
+					<td style = "border: 1px solid black; width: 300px;">
+						<span style="font-weight:bold; float: left;">
+							{{ sub_sub_attributes }} 
+						</span>
+					</td> 
+					<td style = "border: 1px solid black">{{ sub_attributes[sub_sub_attributes] }}</td>
+				</tr>
+			{% endfor %}
+			</table>
+		{% endfor %}
+		<hr>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5>
+	<table  style = "border: 1px solid black; margin: 20px; width: 900px;">
+	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+			<td  style = "border: 1px solid black; width: 300px;"><span style="font-weight:bold; float: left;">{{ attributes }}</span></td>
+			<td  style = "border: 1px solid black">{{ results[5][1][attributes] }}</td>
+		</tr>
+	{% endfor %}
+	</table>
+	<b><hr></b>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }}</u></h5><br>
+	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[6][0] }}</h5><br>
+	{% for attributes in results[6][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+<!-- if only phndir lookup has taken place among the optional lookups but not numverify -->
+{% elif results[0] == 6 %}
+	{% for attributes in results[1:3]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
+		{% for sub_attributes in attributes[1] %}
+			<table  style = "border: 1px solid black; margin: 20px; width: 900px;">
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+					<td  style = "border: 1px solid black; width: 300px;">
+						<span style="font-weight:bold; float: left;">
+							{{ sub_sub_attributes }} 
+						</span>
+					</td> 
+					<td  style = "border: 1px solid black">{{ sub_attributes[sub_sub_attributes] }}</td>
+				</tr>
+			{% endfor %}
+			</table>
+			<hr>
+		{% endfor %}
+		<br>
+	{% endfor %}
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[3][0] }}</h5>
+	<table  style = "border: 1px solid black; margin: 20px; width: 900px;">
+	{% for attributes in results[3][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+			<td style = "border: 1px solid black; width: 300px;"><span style="font-weight:bold; float: left;">{{ attributes }}</span></td> 
+			<td style = "border: 1px solid black">{{ results[3][1][attributes] }} </td>
+		</tr>
+	{% endfor %}
+	</table>
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5><br>
+	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u>:</b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a><br>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }}: </h5><br>
+	{% for attributes in results[5][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u>:</b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a><br>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+<!-- if only truecaller lookup has taken place among the optional lookups but not numverify -->
+{% elif results[0] == 7 %}
+	{% for attributes in results[1:3]  %}
+		<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
+		{% for sub_attributes in attributes[1] %}
+			<table  style = "border: 1px solid black; margin: 20px; width: 900px;">
+			{% for sub_sub_attributes in sub_attributes %}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				<tr style = "border: 1px solid black">
+					<td style = "border: 1px solid black; width:300px;">
+						<span style="font-weight:bold; float: left;">
+							{{ sub_sub_attributes }} 
+						</span>
+					</td>  
+					<td style = "border: 1px solid black">{{ sub_attributes[sub_sub_attributes] }}</td></tr>
+			{% endfor %}
+			</table>
+		{% endfor %}
+		<hr>
+	{% endfor %}
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[3][0] }}</h5><br>
+	{% for attributes in results[3][1] %}
+		<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a><br>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5><br>
+	{% for attributes in results[4][1] %}
+		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}:</u></b><br>
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			{% for i in attributes[1:] %}
+				<tr  style = "border: 1px solid black">
+					<td style = "border: 1px solid black">
+						<a href={{ i[0] }} style="text-decoration: none;"><b>{{i[1]}}</b></a><br>
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+	{% endfor %}
+
+<!-- if none of the optional lookups have taken place and not numverify -->
+{% else %}
+	{% for attributes in results[1:2]  %}
+		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
+			<h5 display:inline>&nbsp;&nbsp;&nbsp;&nbsp;{{ attributes[0] }}</h5>
+			{% for sub_attributes in attributes[1] %}
+				{% for sub_sub_attributes in sub_attributes %}
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<tr  style = "border: 1px solid black">
+						<td text-align:justify style = "border: 1px solid black">
+							<span style="font-weight:bold; float:left">
+								{{ sub_sub_attributes }} 
+							</span>
+						</td>
+						<td style = "border: 1px solid black">{{ sub_attributes[sub_sub_attributes] }}</td>
+					</tr>
+				{% endfor %}
+			{% endfor %}
+		</table>
+		<hr>
+	{% endfor %}
+	<hr>
+	<h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[2][0] }} </h5><br><br>
+	{% for attributes in results[2][1] %}
 		&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u></u>{{ attributes[0] }}:</u></b><br>
 		<table style = "border: 1px solid black; margin: 20px; width: 900px;">	
 			{% for i in attributes[1:] %}

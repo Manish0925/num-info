@@ -207,7 +207,7 @@ if __name__ == "__main__":
         # optional parameters:
         # debug: Default value -> False
         # port: Default value -> 5000 (not recommended to change it which is why option to change port no. isn't provided in the tool at the first place)
-        app.run()
+        app.run(debug=True)
 
     else:
         # methods to be called in case of CLI interface

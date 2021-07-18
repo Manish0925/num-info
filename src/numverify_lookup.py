@@ -8,6 +8,7 @@ class Numverify:
         # varies from account to account
         self.access_key = "f3a2feeccb645a9b89b01da28db94a8f"
         self.phone_no = phone_no
+        self.lookup_status = False
 
         self.url = (
             "http://apilayer.net/api/validate?access_key="
@@ -25,6 +26,10 @@ class Numverify:
     # sets the results to be displayed in the web-UI
     # creation of a dictionary for easier referencing
     def set_results(self):
+        try:
+            self.answer["valid"]
+        except KeyError:
+            return -1
         self.heading = "Numverify Lookup"
         self.dictionary = (
             {
@@ -39,6 +44,13 @@ class Numverify:
                 "Line type": self.answer["line_type"],
             },
         )
+        return 0
+
+    def set_lookup_status(self):
+        self.lookup_status = True
+
+    def get_lookup_status(self):
+        return self.lookup_status
 
     # returns results to be displayed in the web-UI
     # NOTE: the returned value is a tuple consisting of the heading for the lookup and a dictionary (for mapping)
@@ -47,6 +59,10 @@ class Numverify:
 
     # returns results to be displayed in the CLI
     def display_results(self, colors):
+        try:
+            self.answer["valid"]
+        except KeyError:
+            return -1
         if self.answer["valid"]:
             print()
             auxillary.line()
@@ -89,3 +105,5 @@ class Numverify:
                 colored(self.answer["line_type"], colors[2]),
             )
             auxillary.line()
+
+        return 0

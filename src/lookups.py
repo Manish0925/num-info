@@ -70,7 +70,10 @@ class Lookups:
         # numverify lookup (not always reliable due to server-side issues)
         print("Performing Numverify Lookup...")
         self.numverify_instance = numverify_lookup.Numverify(self.string_no)
-        self.numverify_instance.processes()
+        try:
+            self.numverify_instance.processes()
+        except KeyError:
+            print("hello")
         print("Done")
 
         # truecaller lookup (must have a microsoft account)
@@ -202,7 +205,8 @@ class Lookups:
     # sets the results in order to be displayed in the web-UI
     def set_results(self):
         self.local_instance.set_results()
-        self.numverify_instance.set_results()
+        if self.numverify_instance.set_results() != -1:
+            self.numverify_instance.set_lookup_status()
         if self.microsoft_flag != "n" and self.truecaller_instance.get_lookup_status():
             self.truecaller_instance.set_results()
         if self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status():
@@ -226,16 +230,27 @@ class Lookups:
         ) and (
             self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
         ):
-            return (
-                1,
-                self.local_instance.get_results(),
-                self.numverify_instance.get_results(),
-                self.truecaller_instance.get_results(),
-                self.phndir_instance.get_results(),
-                self.get_service_provider_comparison(),
-                self.number_google_dorks_instance.get_results(),
-                self.name_google_dorks_instance.get_results(),
-            )
+            if self.numverify_instance.get_lookup_status():
+                return (
+                    1,
+                    self.local_instance.get_results(),
+                    self.numverify_instance.get_results(),
+                    self.truecaller_instance.get_results(),
+                    self.phndir_instance.get_results(),
+                    self.get_service_provider_comparison(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
+            else:
+                return (
+                    5,
+                    self.local_instance.get_results(),
+                    self.truecaller_instance.get_results(),
+                    self.phndir_instance.get_results(),
+                    self.get_service_provider_comparison(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
 
         # if only phndir lookup has taken place among the optional lookups
         elif (
@@ -246,15 +261,25 @@ class Lookups:
         ) and (
             self.phndir_scan_flag != "n" and self.phndir_instance.get_lookup_status()
         ):
-            return (
-                2,
-                self.local_instance.get_results(),
-                self.numverify_instance.get_results(),
-                self.phndir_instance.get_results(),
-                self.get_service_provider_comparison(),
-                self.number_google_dorks_instance.get_results(),
-                self.name_google_dorks_instance.get_results(),
-            )
+            if self.numverify_instance.get_lookup_status():
+                return (
+                    2,
+                    self.local_instance.get_results(),
+                    self.numverify_instance.get_results(),
+                    self.phndir_instance.get_results(),
+                    self.get_service_provider_comparison(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
+            else:
+                return (
+                    6,
+                    self.local_instance.get_results(),
+                    self.phndir_instance.get_results(),
+                    self.get_service_provider_comparison(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
 
         # if only truecaller lookup has taken place among the optional lookups
         elif (
@@ -265,20 +290,36 @@ class Lookups:
                 and self.phndir_instance.get_lookup_status()
             )
         ):
-            return (
-                3,
-                self.local_instance.get_results(),
-                self.numverify_instance.get_results(),
-                self.truecaller_instance.get_results(),
-                self.number_google_dorks_instance.get_results(),
-                self.name_google_dorks_instance.get_results(),
-            )
+            if self.numverify_instance.get_lookup_status():
+                return (
+                    3,
+                    self.local_instance.get_results(),
+                    self.numverify_instance.get_results(),
+                    self.truecaller_instance.get_results(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
+            else:
+                return (
+                    7,
+                    self.local_instance.get_results(),
+                    self.truecaller_instance.get_results(),
+                    self.number_google_dorks_instance.get_results(),
+                    self.name_google_dorks_instance.get_results(),
+                )
 
         # if none of the optional lookups has taken place
         else:
-            return (
-                4,
-                self.local_instance.get_results(),
-                self.numverify_instance.get_results(),
-                self.number_google_dorks_instance.get_results(),
-            )
+            if self.numverify_instance.get_lookup_status():
+                return (
+                    4,
+                    self.local_instance.get_results(),
+                    self.numverify_instance.get_results(),
+                    self.number_google_dorks_instance.get_results(),
+                )
+            else:
+                return (
+                    8,
+                    self.local_instance.get_results(),
+                    self.number_google_dorks_instance.get_results(),
+                )
