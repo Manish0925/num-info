@@ -77,11 +77,12 @@ class NameGoogleDorksLookup:
 
     # method to set results to be displayed in the web UI
     def set_results(self):
+        self.text_name=self.name.replace("+"," ")
         self.general_footprints_urls = (
             "General Footprints",
             (
                 ("https://www.google.com/search?q=intext%3A%22" + self.name + "%22"),
-                ("intext:" + '"' + self.name + '"'),
+                ("intext:" + '"' + self.text_name + '"'),
             ),
             (
                 (
@@ -94,7 +95,7 @@ class NameGoogleDorksLookup:
                     + " "
                     + "intext:"
                     + '"'
-                    + self.name
+                    + self.text_name
                     + '"'
                 ),
             ),
@@ -112,7 +113,7 @@ class NameGoogleDorksLookup:
                         + self.name
                         + "%22"
                     ),
-                    ("site:" + i + " " + "intext:" + '"' + self.name + '"'),
+                    ("site:" + i + " " + "intext:" + '"' + self.text_name + '"'),
                 ),
             )
 
@@ -130,7 +131,7 @@ class NameGoogleDorksLookup:
                         + self.name
                         + "%22"
                     ),
-                    ("site:" + i + " " + "intext:" + '"' + self.name + '"'),
+                    ("site:" + i + " " + "intext:" + '"' + self.text_name + '"'),
                 )
             )
 

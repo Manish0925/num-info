@@ -70,11 +70,12 @@ class Lookups:
         # numverify lookup (not always reliable due to server-side issues)
         print("Performing Numverify Lookup...")
         self.numverify_instance = numverify_lookup.Numverify(self.string_no)
-        try:
-            self.numverify_instance.processes()
-        except KeyError:
-            print("hello")
-        print("Done")
+        self.numverify_instance.processes()
+
+        if self.numverify_instance.get_lookup_status():
+            print("Done")
+        else:
+            print("Server-side error")
 
         # truecaller lookup (must have a microsoft account)
         if not self.web_ui:

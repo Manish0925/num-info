@@ -1,122 +1,67 @@
-import sys
-
 from phonenumbers.phonenumberutil import is_valid_number
 from phonenumbers import parse
 import lookups
 import auxillary
+import argparse
 
 # default browser is chrome, can be set to firefox via command line args
-browser = "chrome"
 global person_lookups
 person_lookups = None
-string_no = ""
-web_ui = False
 
 # sets parameters on the basis of command line args
 
-# executes the code only if the file is being run directly (and not imported)
 if __name__ == "__main__":
 
-    if len(sys.argv) == 1:
+    # create the parser
+    parser = argparse.ArgumentParser(
+        description="an OSINT based tool to perform phone number lookups",
+    )
 
-        auxillary.display_help()
-        sys.exit()
+    # add arguments
+    parser.add_argument(
+        "-b",
+        "--browser",
+        type=str,
+        choices=["chrome", "firefox"],
+        default="chrome",
+        help="set the browser",
+    )
+    parser.add_argument(
+        "-e", "--serve", help="use the web-UI.", action="store_true", default=None
+    )
+    parser.add_argument("-s", "--scan", type=str, default=None)
 
-    elif len(sys.argv) == 2:
+    # parse the arguments
+    args = parser.parse_args()
 
-        if (sys.argv[1] == "-h") or (sys.argv[1] == "--help"):
-            auxillary.display_help()
-        elif (sys.argv[1] == "-e") or (sys.argv[1] == "--serve"):
-            web_ui = True
-        else:
-            auxillary.exit_condition()
+    browser = args.browser
 
-    elif len(sys.argv) == 3:
-        if (sys.argv[1] == "-s") or (sys.argv[1] == "--scan"):
-            if len(sys.argv[2]) > 10:
-                string_no = sys.argv[2]
-                if (
-                    not (string_no.startswith("+") and string_no[1:].isdigit())
-                    or string_no.isdigit()
-                ):
-                    auxillary.exit_condition()
-            else:
-                auxillary.exit_condition()
-        else:
-            auxillary.exit_condition()
-
-    elif len(sys.argv) == 4:
-        if sys.argv[1] == "-b" or sys.argv[1] == "--browser":
-            if sys.argv[2] == "firefox":
-                browser = "firefox"
-            elif sys.argv[2] != "chrome":
-                auxillary.exit_condition()
-            if sys.argv[3] == "-e" or sys.argv[3] == "--serve":
-                web_ui = True
-            else:
-                auxillary.exit_condition()
-        elif sys.argv[1] == "-s" or sys.argv[1] == "--serve":
-            web_ui = True
-            if sys.argv[2] == "-b" or sys.argv[2] == "--browser":
-                if sys.argv[3] == "firefox":
-                    browser = "firefox"
-                elif sys.argv[2] != "chrome":
-                    auxillary.exit_condition()
-            else:
-                auxillary.exit_condition()
-        else:
-            auxillary.exit_condition()
-
-    elif len(sys.argv) == 5:
-
-        if (sys.argv[1] == "-b") or (sys.argv[1] == "--browser"):
-
-            if sys.argv[2] == "firefox":
-                browser = "firefox"
-            elif sys.argv[2] != "chrome":
-                auxillary.exit_condition()
-            if (sys.argv[3] == "-s") or (sys.argv[3] == "--scan"):
-                if len(sys.argv[4]) > 10:
-                    string_no = sys.argv[4]
-                    if (
-                        not (string_no.startswith("+") and string_no[1:].isdigit())
-                        or string_no.isdigit()
-                    ):
-                        auxillary.exit_condition()
-                else:
-                    auxillary.exit_condition()
-            else:
-                auxillary.exit_condition()
-
-        elif (sys.argv[3] == "-b") or (sys.argv[3] == "--browser"):
-            if sys.argv[4] == "firefox":
-                browser = "firefox"
-            elif sys.argv[4] != "chrome":
-                auxillary.exit_condition()
-            if (sys.argv[1] == "-s") or (sys.argv[1] == "--scan"):
-                if len(sys.argv[2]) > 10:
-                    string_no = sys.argv[2]
-                    if (
-                        not (string_no.startswith("+") and string_no[1:].isdigit())
-                        or string_no.isdigit()
-                    ):
-                        auxillary.exit_condition()
-                else:
-                    auxillary.exit_condition()
-            else:
-                auxillary.exit_condition()
-
-        else:
-            auxillary.exit_condition()
-
-    else:
-        auxillary.exit_condition()
+    web_ui = args.serve
+    string_no = args.scan
 
     person_lookups = lookups.Lookups()
-    person_lookups.display_logo()
 
-    # in case the user is using a web interface
-    if web_ui:
+    # if CLI
+    if string_no and (not web_ui):
+        if len(string_no) > 10:
+            if (
+                not (string_no.startswith("+") and string_no[1:].isdigit())
+                or string_no.isdigit()
+            ):
+                auxillary.exit_condition()
+            else:
+                # methods to be called in case of CLI interface
+                person_lookups.display_logo()
+                person_lookups.set_browser(browser)
+                person_lookups.set_number(string_no)
+                person_lookups.processes()
+                person_lookups.display_results()
+        else:
+            auxillary.exit_condition()
+
+    # if Web-UI
+    elif web_ui and (not string_no):
+        person_lookups.display_logo()
         person_lookups.set_web_ui()
         from flask import (
             Flask,
@@ -207,11 +152,4 @@ if __name__ == "__main__":
         # optional parameters:
         # debug: Default value -> False
         # port: Default value -> 5000 (not recommended to change it which is why option to change port no. isn't provided in the tool at the first place)
-        app.run()
-
-    else:
-        # methods to be called in case of CLI interface
-        person_lookups.set_browser(browser)
-        person_lookups.set_number(string_no)
-        person_lookups.processes()
-        person_lookups.display_results()
+        app.run(debug=True)

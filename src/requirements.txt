@@ -1,4 +1,5 @@
 appdirs==1.4.4
+astunparse==1.6.3
 autopep8==1.5.7
 backports.entry-points-selectable==1.1.0
 beautifulsoup4==4.9.3
@@ -29,6 +30,7 @@ phonenumbers==8.12.25
 platformdirs==2.0.2
 pycodestyle==2.7.0
 pyee==8.1.0
+pyflowchart==0.1.4
 pyppeteer==0.2.5
 pyquery==1.4.3
 regex==2021.4.4
