@@ -1,97 +1,120 @@
 {% extends "base.html" %}
 {% block title %}num-info{% endblock %}
 {% block content %}
+
+<style>
+    h5 {
+        font-weight: bold;
+        color: var(--nord6);
+    }
+
+    h6 {
+        font-weight: bold;
+        color: var(--nord7);
+    }
+
+    label {
+        font-weight: bold;
+        color: var(--nord8);
+    }
+
+    small {
+        font-weight: bold;
+        color: var(--nord9);
+    }
+
+    hr {
+        color: var(--nord4);
+    }
+
+    button {
+        background-color: var(--nord8);
+    }
+</style>
+
 <div class="my-md-3 container">
     <div class="row">
         <div class="container col-12">
             <div>
                 <form action="#" method="post">
-                    <div
-                        id="input-group-1"
-                        role="group"
-                        class="form-group"
-                    >
-                        <label
-                            id="input-group-1__BV_label_"
-                            for="input-1"
-                            class="d-block"
-                            ><h5>Phone number :</h5></label
-                        >
+                    <div id="input-group-1" role="group" class="form-group">
+                        <label id="input-group-1__BV_label_" for="input-1" class="d-block">
+                            <h5>Phone number</h5>
+                        </label>
                         <div>
-                            <input
-                                id="input-number",
-                                name="name_input_number"
-                                type="tel"
-                                placeholder="e.g: 33678132393"
-                                required="required"
-                                aria-required="true"
-                                class="form-control"
-                            />
-                            <small
-                                tabindex="-1"
-                                id="input-group-1__BV_description_"
-                                class="form-text text-muted"
-                                >Only accepts E164 and International
-                                formats as input.</small
-                            >
+                            <input id="input-number" , name="name_input_number" type="tel"
+                                placeholder="e.g: +918790133019" required="required" aria-required="true"
+                                class="form-control" style="
+                                border-color: var(--nord0);
+                                background-color: var(--nord5);
+                                color: var(--nord3);
+                                " />
+                            <small tabindex="-1" id="input-group-1__BV_description_" class="form-text text-muted">
+                                Only accepts E164 and International
+                                formats as input.
+                            </small>
                         </div>
                         <br />
                     </div>
-                    <hr></h/>
-                    <div
-                        id="input-group-1"
-                        role="group"
-                        class="form-group"
-                    >
-                        <label
-                            id="input-group-1__BV_label_"
-                            for="input-1"
-                            class="d-block"
-                            ><h5
-                                >Optional Lookups: (recommended)</h5
-                            ></label
-                        >
+                    <hr>
+                    <div id="input-group-1" role="group" class="form-group">
+                        <label id="input-group-1__BV_label_" for="input-1" class="d-block">
+                            <h5>Optional Lookups (recommended)</h5>
+                        </label>
                         <br />
-                        <script type = "text/javascript">
+                        <script type="text/javascript">
                             function divDisplay(vehicle1) {
                                 var divContent = document.getElementById("microsoft-sign-in-credentials-zone")
                                 divContent.style.display = vehicle1.checked ? "block" : "none";
                             }
                         </script>
                         <form>
-                            <input
-                                type="checkbox"
-                                id="truecaller-lookup"
-                                name="name_truecaller_lookup"
-                                value="checked"
-                                onclick= "divDisplay(this)"
-                            />
-                            <label for="vehicle1"> Truecaller (Microsoft account required): </label>
-                            <div id="microsoft-sign-in-credentials-zone" name="name_microsoft_sign_in_credentials_zone" style = "display:none" >
+                            <input type="checkbox" id="truecaller-lookup" name="name_truecaller_lookup" value="checked"
+                                onclick="divDisplay(this)" />
+                            <label for="vehicle1">
+                                <h6> Truecaller (Microsoft account required)</h6>
+                            </label>
+                            <div id="microsoft-sign-in-credentials-zone" name="name_microsoft_sign_in_credentials_zone"
+                                style="display:none">
                                 <form action="#">
-                                    &nbsp;&nbsp;<label for="uname">Email address:</label><br>
+                                    &nbsp;&nbsp;<label for="uname">Email address</label><br>
                                     &nbsp;&nbsp;<input type="email" id="uname" name="uname"><br>
-                                    &nbsp;&nbsp;<label for="pwsd">Password :</label><br>
+                                    &nbsp;&nbsp;<label for="pwsd">Password</label><br>
                                     &nbsp;&nbsp;<input type="password" id="pwsd" name="pwsd"><br>
                                 </form>
                             </div>
-                            
-                            <br/>
-                            <input
-                                type="checkbox"
-                                id="phndir-lookup"
-                                name="name_phndir_lookup"
-                                value="checked"
-                            />
-                            <label for="vehicle2"> Phndir: </label
-                            ><br /><br />
-                            <button
-                                type="submit"
-                                class="btn m-1 btn-dark btn-sm"
-                                value="phone_no"
-                            >
+
+                            <br />
+                            <input type="checkbox" id="phndir-lookup" name="name_phndir_lookup" value="checked" />
+                            <label for="vehicle2">
+                                <h6>Phndir</h6>
+                            </label><br /><br />
+                            <button type="submit" class="btn m-1 btn-dark btn-sm" value="phone_no" style="
+                                font-weight: bold;
+                                background-color: var(--nord7);
+                                border-color: var(--nord7);
+                                color: var(--nord1);
+                                " onmouseover="change_color(this)" onmouseout="restore_color(this)">
                                 Run lookup
                             </button>
+                            <script>
+                                let nord0 = "#2E3440";
+	                            let nord1 = "#3B4252";
+                                let nord8 = "#88C0D0";
+                                let merc0 = "#212529";
+                                let merc1 = "#009688";
+                                let nord7 = "#8FBCBB";
+                                function change_color(current_element) {
+                                    current_element.style["background-color"] = nord1
+                                    current_element.style["border-color"] = nord1
+                                    current_element.style["color"] = nord7
+                                }
+                                function restore_color(current_element) {
+                                    current_element.style["background-color"] = nord7
+                                    current_element.style["border-color"] = nord7
+                                    current_element.style["color"] = nord1
+                                }
+                            </script>
                         </form>
                     </div>
                 </form>

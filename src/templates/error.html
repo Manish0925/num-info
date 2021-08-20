@@ -1,35 +1,55 @@
-{% extends "base.html" %} {% block title %}num-info{% endblock %} {% block
-content %}
+{% extends "base.html" %}
+{% block title %}error{% endblock %}
+{% block content %}
 
-<div style="background-color: lightpink;">
-    <h1 style="text-align: center;color: darkred;"><b>ERROR</b></h1>
+<style>
+	#heading {
+        background: linear-gradient(var(--nord0), var(--merc0) 60%, var(--nord0))
+	}
+
+    h1 {
+        text-align: center;
+        color: var(--nord14);
+        background: -webkit-linear-gradient(var(--nord11), var(--nord15));
+        background-clip: inherit;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+    }
+
+    #mydiv {
+        position: relative;
+        text-align: center;
+        margin-top: 5%;
+        margin-left: 46%;
+        margin-right: 46%;
+        color: var(--nord4);
+        background-color: var(--nord11);
+    }
+
+    #mydiv1 {
+        position: relative;
+        text-align: center;
+        margin-top: 5%;
+        margin-left: 42%;
+        margin-right: 42%;
+        color: var(--nord1);
+        background-color: var(--nord13);
+    }
+
+    hr {
+        color: var(--nord0);
+    }
+</style>
+
+<div id="heading">
+    <h1>ERROR</h1>
     <hr>
 </div>
 
 <br />
 <br />
 <br />
-<style>
-    #mydiv {
-        position: fixed;
-        top: 55%;
-        left: 55%;
-        margin-top: -9em;
-        /*set to a negative number 1/2 of your height*/
-        margin-left: -8em;
-        /*set to a negative number 1/2 of your width*/
-    }
-
-    #mydiv1 {
-        position: fixed;
-        top: 70%;
-        left: 50%;
-        margin-top: -9em;
-        /*set to a negative number 1/2 of your height*/
-        margin-left: -8em;
-        /*set to a negative number 1/2 of your width*/
-    }
-</style>
 
 <div id="mydiv" class="alert alert-danger" role="alert">Error!</div>
 <div id="mydiv1" class="alert alert-warning" role="alert">

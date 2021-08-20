@@ -4,61 +4,91 @@
 <style>
 	h1 {
 		text-align: center;
-		color: limegreen;
+		color: var(--nord14);
+		background: -webkit-linear-gradient(var(--nord14), var(--nord7));
+		background-clip: inherit;
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
 		font-weight: bold;
 	}
 
 	h5 {
 		display: inline;
 		font-weight: bold;
-	}
-
-	td {
-		text-align: center;
-	}
-
-	#heading {
-		background-color: darkslategray;
+		color: var(--nord6);
 	}
 
 	.table_style {
-		border: 2px solid darkslategray;
-		margin: 20px;
+		border: 2px solid var(--nord0);
+		margin-left: 20px;
+		margin-top: 10px;
+		margin-bottom: 20px;
 		width: 900px;
+		height: 40px
 	}
 
 	.tr_style {
-		border: 2px solid darkslategray;
+		border: 2px solid var(--nord0);
+		border-color: var(--nord0);
+		background-color: var(--nord9);
+		width: 900px;
+		height: 40px
 	}
 
 	.td_style_1 {
-		border: 2px solid darkslategray;
-		background-color: whitesmoke;
+		border: 3px solid var(--nord0);
+		border-color: var(--nord0);
+		background-color: var(--nord8);
 		width: 350px;
 		height: 40px
 	}
 
 	.td_style_2 {
-		border: 2px solid darkslategray;
-		color: darkolivegreen;
-		background-color: lightyellow;
+		border: 3px solid var(--nord0);
+		border-color: var(--nord0);
+		background-color: var(--nord14);
+		color: var(--nord1);
+		text-align: center;
+		height: 40px
 	}
 
 	.td_style_3 {
-		border: 2px solid darkslategray;
-		color: darkblue;
-		background-color: aliceblue;
+		border: 2px solid var(--nord0);
+		border-color: var(--nord0);
+		background-color: var(--nord0);
+		text-align: center;
+		height: 40px
 	}
 
 	.span_style_1 {
 		font-weight: bold;
 		float: left;
-		color: darkslategray;
+		color: var(--nord1);
 	}
 
 	.span_style_2 {
 		font-weight: bold;
-		color: darkolivegreen;
+		color: var(--merc0);
+	}
+
+	.span_style_3 {
+		border: none;
+		text-decoration: none;
+		color: var(--nord1);
+		border-color: var(--nord1);
+		background-color: var(--nord7);
+	}
+
+	.b_class {
+		color: var(--merc3);
+	}
+
+	hr {
+		color: var(--nord0);
+	}
+
+	#heading {
+        background: linear-gradient(var(--nord0), var(--merc0) 60%, var(--nord0))
 	}
 </style>
 
@@ -101,12 +131,14 @@
 	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 	<tr class="tr_style">
 		<td class="td_style_1">
-			<span style="font-weight:bold; float: left;">
+			<span class="span_style_1">
 				{{ attributes }}
 			</span>
 		</td>
 		<td class="td_style_2">
-			{{ results[5][1][attributes] }}
+			<span class="span_style_2">
+				{{ results[5][1][attributes] }}
+			</span>
 		</td>
 	</tr>
 	{% endfor %}
@@ -115,15 +147,14 @@
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[6][0] }}</h5><br><br>
 {% for attributes in results[6][1] %}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<b><u>{{ attributes[0] }}</u></b>
+<b class="b_class"><u>{{ attributes[0] }}</u></b>
 <br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -132,14 +163,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[7][0] }}</h5><br>
 {% for attributes in results[7][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -193,14 +224,13 @@
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }}</h5><br><br>
 {% for attributes in results[5][1] %}
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-<b><u>{{ attributes[0] }}</u>:</b><br>
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -209,14 +239,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[6][0] }} </h5><br><br>
 {% for attributes in results[6][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u>:</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -251,14 +281,14 @@
 {% endfor %}
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5><br>
 {% for attributes in results[4][1] %}
-<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -268,14 +298,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }}</h5><br>
 {% for attributes in results[5][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -309,19 +339,20 @@
 {% endfor %}
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[3][0] }}</h5><br><br>
 {% for attributes in results[3][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
 </table>
 {% endfor %}
+
 <!-- if both optional lookups have taken place but not numverify -->
 {% elif results[0] == 5 %}
 {% for attributes in results[1:4] %}
@@ -370,14 +401,14 @@
 </b>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }}</h5><br>
 {% for attributes in results[5][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -386,14 +417,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[6][0] }}</h5><br><br>
 {% for attributes in results[6][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -447,14 +478,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5><br>
 {% for attributes in results[4][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u>:</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -463,14 +494,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[5][0] }} </h5><br>
 {% for attributes in results[5][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u>:</b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -504,14 +535,14 @@
 {% endfor %}
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[3][0] }}</h5><br>
 {% for attributes in results[3][1] %}
-<b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -521,14 +552,14 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[4][0] }}</h5><br>
 {% for attributes in results[4][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <table class="table_style">
 	{% for i in attributes[1:] %}
 	<tr class="tr_style">
 		<td class="td_style_3">
-			<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-				class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-				onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+			<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+				onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 		</td>
 	</tr>
 	{% endfor %}
@@ -563,15 +594,15 @@
 <hr>
 <h5>&nbsp;&nbsp;&nbsp;&nbsp;{{ results[2][0] }} </h5><br><br>
 {% for attributes in results[2][1] %}
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b><u></u>{{ attributes[0] }}</u></b><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<b class="b_class"><u>{{ attributes[0] }}</u></b><br>
 <div class="list-group">
 	<table class="table_style">
 		{% for i in attributes[1:] %}
 		<tr class="tr_style">
 			<td class="td_style_3">
-				<a href={{ i[0] }} style="text-decoration: none; color: darkblue; background-color: aliceblue;"
-					class="list-group-item list-group-item-action " onmouseover="change_color(this)"
-					onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
+				<a href={{ i[0] }} class="list-group-item list-group-item-action span_style_3"
+					onmouseover="change_color(this)" onmouseout="restore_color(this)"><b>{{i[1]}}</b></a>
 			</td>
 		</tr>
 		{% endfor %}
@@ -580,14 +611,22 @@
 {% endfor %}
 {% endif %}
 <script type="text/javascript">
+	let nord0 = "#2E3440";
+	let nord1 = "#3B4252";
+	let nord7 = "#8FBCBB";
+	let merc0 = "#212529";
+	let merc1 = "#009688";
+
 	function change_color(current_element) {
-		current_element.style["background-color"] = "darkblue"
-		current_element.style["color"] = "white"
+		current_element.style["background-color"] = nord1
+		current_element.style["border-color"] = nord1
+		current_element.style["color"] = nord7
 	}
 
 	function restore_color(current_element) {
-		current_element.style["background-color"] = "aliceblue"
-		current_element.style["color"] = "darkblue"
+		current_element.style["background-color"] = nord7
+		current_element.style["border-color"] = nord7
+		current_element.style["color"] = nord0 
 	}
 </script>
 {% endblock %}

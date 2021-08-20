@@ -41,7 +41,7 @@ class TrueCaller:
             driver = webdriver.Firefox(options=options)
         else:
             options = webdriver.ChromeOptions()
-            options.add_argument("headless")
+            # options.add_argument("headless")
             options.add_argument("log-level=3")
             driver = webdriver.Chrome(options=options)
 
