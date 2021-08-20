@@ -25,7 +25,7 @@ Must atleast have one of the following <browser, driver> pair:
    - cd num-info
    - pip install -r requirements.txt
    - cd src
-   - python num-info.py
+   - python num-info.py --help
 3. Refer to the help displayed and insert the appropriate parameters
 
 ---
