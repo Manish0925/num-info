@@ -41,7 +41,7 @@ class TrueCaller:
             driver = webdriver.Firefox(options=options)
         else:
             options = webdriver.ChromeOptions()
-            # options.add_argument("headless")
+            options.add_argument("headless")
             options.add_argument("log-level=3")
             driver = webdriver.Chrome(options=options)
 
@@ -76,16 +76,30 @@ class TrueCaller:
 
         sleep(4)
 
-        security = driver.find_elements_by_xpath('//*[@id="idA_PWD_SwitchToCredPicker"]')
+        security = driver.find_elements_by_xpath(
+            '//*[@id="idA_PWD_SwitchToCredPicker"]'
+        )
         if len(security) != 0:
             security[0].click()
             sleep(2)
-            driver.find_element_by_xpath('//*[@id="credentialList"]/div[3]/div/div/div[2]').click()
+            driver.find_element_by_xpath(
+                '//*[@id="credentialList"]/div[3]/div/div/div[2]'
+            ).click()
 
         sleep(2)
 
         your_password_input = driver.find_element_by_xpath('//*[@id="i0118"]')
         your_password_input.send_keys(self.your_password, Keys.RETURN)
+
+        sleep(3)
+
+        try:
+            stay_signed_in_comfirmation = driver.find_element_by_xpath(
+                '//*[@id="idBtn_Back"]'
+            )
+            stay_signed_in_comfirmation.send_keys(Keys.RETURN)
+        except NoSuchElementException:
+            pass
 
         sleep(6)
 

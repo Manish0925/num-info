@@ -72,7 +72,7 @@ class Lookups:
         self.numverify_instance = numverify_lookup.Numverify(self.string_no)
         self.numverify_instance.processes()
 
-        if self.numverify_instance.get_lookup_status():
+        if self.numverify_instance.get_lookup_status() == 0:
             print("Done")
         else:
             print("Server-side error")

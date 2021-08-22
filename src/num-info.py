@@ -30,13 +30,6 @@ if __name__ == "__main__":
     parser.add_argument(
         "-e", "--serve", help="use the web-UI.", action="store_true", default=None
     )
-    parser.add_argument(
-        "-o",
-        "--online",
-        help="view the online documentation",
-        action="store_true",
-        default=None,
-    )
     parser.add_argument("-s", "--scan", type=str, default=None)
 
     # parse the arguments
@@ -160,29 +153,4 @@ if __name__ == "__main__":
         # optional parameters:
         # debug: Default value -> False
         # port: Default value -> 5000 (not recommended to change it which is why option to change port no. isn't provided in the tool at the first place)
-        app.run()
-
-    # view the online documentation
-    elif args.online:
-        person_lookups.display_logo()
-        person_lookups.set_web_ui()
-
-        from flask import (
-            Flask,
-            render_template,
-            request,
-        )
-
-        # initiating the flask app
-        app = Flask(__name__)
-
-        # not necessary (just there)
-        app.secret_key = "hello"
-
-        # '/' indicates default domain (home page)
-        @app.route("/")
-        def documentation():
-            if request.method=="GET":
-                return render_template("documentation.html")
-
-        app.run()
+        app.run(debug=True)
