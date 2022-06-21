@@ -21,11 +21,13 @@ Must atleast have one of the following <browser, driver> pair:
      - [Installation](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiL9c3xg9rxAhUYH7cAHW98DqcQFjAAegQIBRAD&url=https%3A%2F%2Fpypi.org%2Fproject%2Fvirtualenv%2F&usg=AOvVaw3CZEVr8aqeheSGZiDLuPtr)
      - [Documentation](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&ved=2ahUKEwiL9c3xg9rxAhUYH7cAHW98DqcQFjAJegQIBhAD&url=https%3A%2F%2Fvirtualenv.pypa.io%2F&usg=AOvVaw3Q9Mzr-1q6xjEJO-UW0ylq)
 2. Enter the following commands:
-   - git clone https://github.com/Manish0925/num-info
-   - cd num-info
-   - pip install -r requirements.txt
-   - cd src
-   - python num-info.py --help
+   ```
+   git clone https://github.com/Manish0925/num-info
+   cd num-info
+   pip install -r requirements.txt
+   cd src
+   python num-info.py --help
+   ```
 3. Refer to the help displayed and insert the appropriate parameters
 
 ---
