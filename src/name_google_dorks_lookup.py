@@ -77,7 +77,7 @@ class NameGoogleDorksLookup:
 
     # method to set results to be displayed in the web UI
     def set_results(self):
-        self.text_name=self.name.replace("+"," ")
+        self.text_name = self.name.replace("+", " ")
         self.general_footprints_urls = (
             "General Footprints",
             (
